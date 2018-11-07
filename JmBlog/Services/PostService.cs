@@ -1,4 +1,6 @@
-﻿using JmBlog.Interfaces;
+﻿using JmBlog.Data.Contracts;
+using JmBlog.Interfaces;
+using JmBlog.Model;
 using JmBlog.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -18,8 +20,12 @@ namespace JmBlog.Services
 
         public void Create(PostCreateViewModel viewModel)
         {
-            Post post = new Post(viewModel.Title, viewModel.Text, viewModel.DatePublished, viewModel.UrlImage);
-            _postRepository.Save();
+            Post post = new Post();
+            post.Title = viewModel.Title;
+            post.Text = viewModel.Text;
+            post.DatePublished = viewModel.DatePublished;
+            post.UrlImage = viewModel.UrlImage;
+            _postRepository.Save(post);
         }
     }
 }
