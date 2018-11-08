@@ -92,6 +92,33 @@ namespace JmBlog.Tests.Data
             (count).ShouldBe(0);
         }
 
+        [Fact]
+        public void Should_Return_Posts_Where_Size_And_Page_IsNull()
+        {
+            var paging = new PagingFilter();
+
+            var posts = _postRepository.Get(paging);
+            Assert.NotNull(posts);
+        }
+
+        [Fact]
+        public void Should_Return_Total_Posts_Equals_Size()
+        {
+            var paging = new PagingFilter() { Size = 5 };
+
+            var posts = _postRepository.Get(paging);
+            Assert.Equal(5, posts.Count());
+        }
+
+        [Fact]
+        public void Should_Return_Zero_Posts_Where_Page_Greather_Than_Total_Itens()
+        {
+            var paging = new PagingFilter() { Page = 1 };
+
+            var posts = _postRepository.Get(paging);
+            Assert.Equal(0, posts.Count());
+        }
+
         private async Task PopulateDB()
         {
             var posts = Builder<Post>.CreateListOfSize(10).All().With(x => x.Id, 0).TheLast(1).With(x => x.Permalink, "permalink-teste").Build().ToList();
