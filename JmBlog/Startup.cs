@@ -6,6 +6,7 @@ using JmBlog.Data;
 using JmBlog.Data.Contracts;
 using JmBlog.Interfaces;
 using JmBlog.Services;
+using JmBlog.Setup;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -83,6 +84,8 @@ namespace JmBlog
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            Task.Run(() => 
+            app.InitDB(Configuration)).Wait();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
