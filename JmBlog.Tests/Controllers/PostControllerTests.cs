@@ -85,5 +85,29 @@ namespace JmBlog.Tests.Controllers
         //     _mockService.Verify(x => x.GetById(1), Times.Once);
 
         // }
+
+        [Fact]
+        public void ShouldReturnOkResponseFromAllPosts()
+        {
+            IEnumerable<PostListViewModel> posts = new List<PostListViewModel>()
+            {
+                new PostListViewModel()
+                {
+                    Id = 1,
+                    Title = "Teste",
+                    Summary = "Teste do primeiro post do Hackaton blog JMS",
+                    DatePublished = DateTime.Now,
+                }
+            };
+
+            var request = new PagingFilter();
+            _mockService.Setup(x => x.Get(It.IsAny<PagingFilter>())).Returns(posts);
+
+            var result = _controller.Get(request);
+
+            _mockService.Verify(x => x.Get(It.IsAny<PagingFilter>()), Times.Once);
+            _mockService.VerifyNoOtherCalls();
+            Assert.IsType<List<PostListViewModel>>(result);
+        }
     }
 }
