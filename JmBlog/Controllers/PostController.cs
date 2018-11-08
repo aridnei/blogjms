@@ -27,8 +27,8 @@ namespace JmBlog.Controllers
 
             try
             {
-                var post = _postService.Create(viewModel);
-                return base.Created(HttpContext.Request.Path + "/" + post.Id, post);
+                var postId = _postService.Create(viewModel);
+                return base.Created(HttpContext.Request.Path + "/" + postId, postId);
             }
             catch (Exception ex)
             {
