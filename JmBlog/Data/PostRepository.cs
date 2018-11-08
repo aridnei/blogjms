@@ -19,7 +19,8 @@ namespace JmBlog.Data
             this._context = context;
         }
 
-        public async Task Save(Post post){
+        public async Task Save(Post post)
+        {
             await _context.AddAsync(post);
             await _context.SaveChangesAsync();
         }
@@ -29,17 +30,28 @@ namespace JmBlog.Data
             return _context.Posts.FirstOrDefault(p => p.Id == postId);
         }
 
+        public Post GetByPermalink(string permalink)
+        {
+            return _context.Posts.FirstOrDefault(x => x.Permalink.Equals(permalink));
+        }
+
+        public int GetPermalinks(string permalink)
+        {
+            return _context.Posts.Where(x => x.Permalink.Equals(permalink)).Count();
+        }
+
         public IEnumerable<PostListViewModel> Get(PagingFilter paging)
         {
             var query = _context.Posts.Where(x => x.DatePublished != null)
                 .OrderByDescending(x => x.DatePublished).Select(x => new PostListViewModel()
-            {
-                Id =x.Id,
-               Title = x.Title,
-               Summary = x.Summary,
-               DatePublished =x.DatePublished.Value,
-               UrlImage = x.UrlImage
-            });
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Summary = x.Summary,
+                    DatePublished = x.DatePublished.Value,
+                    UrlImage = x.UrlImage,
+                    Permalink = x.Permalink
+                });
 
             if (!paging.Page.HasValue)
                 paging.Page = page;
@@ -52,6 +64,9 @@ namespace JmBlog.Data
 
         public IEnumerable<PostListViewModel> GetByFilter(PagingFilter paging)
         {
+            if (string.IsNullOrEmpty(paging.Filter))
+                paging.Filter = string.Empty;
+
             var query = _context.Posts.Where(x => x.DatePublished != null && (x.Title.ToUpper().Contains(paging.Filter.ToUpper()) || x.Text.ToUpper().Contains(paging.Filter.ToUpper())))
                 .OrderByDescending(x => x.DatePublished).Select(x => new PostListViewModel()
                 {
@@ -68,7 +83,7 @@ namespace JmBlog.Data
             if (!paging.Size.HasValue)
                 paging.Size = size;
 
-            return query.Skip(paging.Page.Value * paging.Size.Value).Take(paging.Size.Value);
+            return query.Skip((paging.Page.Value * paging.Size.Value)).Take(paging.Size.Value);
         }
     }
 }

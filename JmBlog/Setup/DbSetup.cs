@@ -48,10 +48,10 @@ namespace JmBlog.Setup
                     DatePublished = DateTime.Now.AddDays(-4)
                 };
 
-                postService.Create(p1);
-                postService.Create(p2);
-                postService.Create(p3);
-                postService.Create(p4);
+                await postService.Create(p1);
+                await postService.Create(p2);
+                await postService.Create(p3);
+                await postService.Create(p4);
 
             }
         }

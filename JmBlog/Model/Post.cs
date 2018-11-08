@@ -13,6 +13,7 @@ namespace JmBlog.Model
         public DateTime? DatePublished { get; set; }
         public DateTime DateUpdated { get; set; }
         public string UrlImage { get; set; }
+        public string Permalink { get; set; }
 
         public Post()
         {
