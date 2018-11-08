@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JmBlog", "JmBlog\JmBlog.csproj", "{802586E4-0FB4-4185-9779-2FEFC0932BFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JmBlog", "JmBlog\JmBlog.csproj", "{802586E4-0FB4-4185-9779-2FEFC0932BFC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{A345127B-BB1E-448C-AF45-E3E62BC934D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JmBlog.Tests", "JmBlog.Tests\JmBlog.Tests.csproj", "{2212FE75-9DE7-4CDD-8230-08A2C5AAC474}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{802586E4-0FB4-4185-9779-2FEFC0932BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{802586E4-0FB4-4185-9779-2FEFC0932BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{802586E4-0FB4-4185-9779-2FEFC0932BFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2212FE75-9DE7-4CDD-8230-08A2C5AAC474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2212FE75-9DE7-4CDD-8230-08A2C5AAC474}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2212FE75-9DE7-4CDD-8230-08A2C5AAC474}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2212FE75-9DE7-4CDD-8230-08A2C5AAC474}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2212FE75-9DE7-4CDD-8230-08A2C5AAC474} = {A345127B-BB1E-448C-AF45-E3E62BC934D1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {95386F34-28BF-4F9B-A425-2738C03CA83F}
