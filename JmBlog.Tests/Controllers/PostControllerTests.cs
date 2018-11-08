@@ -100,6 +100,39 @@ namespace JmBlog.Tests.Controllers
             _mockService.Verify(x => x.GetById(1), Times.Once);
         }
 
+        [Fact]
+        public void GetPostByPermalink_OK_Response()
+        {
+            var permalinkTest = "permalink-teste";
+            var p = Builder<Post>.CreateNew().Build();
+            _mockService.Setup(x => x.GetByPermalink(permalinkTest)).Returns(p);
+
+            var getResult = _controller.GetByPermalink(permalinkTest);
+            var result = getResult as OkObjectResult;
+            var content = result.Value as Post;
+
+            Assert.Equal((int)HttpStatusCode.OK, result.StatusCode);
+            Assert.NotNull(content);
+            Assert.Equal(p.Id, content.Id);
+            Assert.Equal(p.Title, content.Title);
+            Assert.Equal(p.Summary, content.Summary);
+            Assert.Equal(p.Text, content.Text);
+            _mockService.Verify(x => x.GetByPermalink(permalinkTest), Times.Once);
+        }
+
+        [Fact]
+        public void GetPostByPermalink_NotFound_Response()
+        {
+            var permalinkTest = "permalink-teste";
+            _mockService.Setup(x => x.GetByPermalink(permalinkTest)).Returns((Post)null);
+
+            var getResult = _controller.GetByPermalink(permalinkTest);
+            var result = getResult as NotFoundResult;
+
+            Assert.Equal((int)HttpStatusCode.NotFound, result.StatusCode);
+
+            _mockService.Verify(x => x.GetByPermalink(permalinkTest), Times.Once);
+        }
 
         [Fact]
         public void ShouldReturnOkResponseFromAllPosts()

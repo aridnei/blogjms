@@ -97,5 +97,19 @@ namespace JmBlog.Tests.Services
 
             _mockRepository.Verify(x => x.GetByFilter(It.IsAny<PagingFilter>()), Times.Never);
         }
+
+        [Theory]
+        [InlineData("permalink-teste")]
+        [InlineData("permalink")]
+        [InlineData("")]
+        public void MustCallServiceOnGetByPermalink(string permalink)
+        {
+            _mockRepository.Setup(x => x.GetByPermalink(It.Is<string>(s => s.Equals(permalink)))).Returns(new Post());
+
+            var result = _service.GetByPermalink(permalink);
+
+            _mockRepository.Verify(x => x.GetByPermalink(It.Is<string>(s => s.Equals(permalink))), Times.Once);
+            _mockRepository.VerifyNoOtherCalls();
+        }
     }
 }
