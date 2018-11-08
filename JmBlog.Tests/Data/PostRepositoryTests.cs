@@ -65,6 +65,32 @@ namespace JmBlog.Tests.Data
         }
 
         [Fact]
+        public void Get_Page_1_Limit2()
+        {
+            var results = _postRepository.Get(new PagingFilter{Page = 1, Size = 2}).ToList();
+            Assert.NotNull(results);
+            Assert.Equal(2, results.Count());
+            Assert.True(results[0].DatePublished > results[1].DatePublished);
+        }
+
+        [Fact]
+        public void Get_Page_1_Limit2_without_page_size()
+        {
+            var results = _postRepository.Get(new PagingFilter()).ToList();
+            Assert.NotNull(results);
+            Assert.Equal(10, results.Count());
+            Assert.True(results[0].DatePublished > results[9].DatePublished);
+        }
+
+        [Fact]
+        public void Get_Page_6_Limit2()
+        {
+            var results = _postRepository.Get(new PagingFilter{Page = 6, Size = 2}).ToList();
+            Assert.Empty(results);
+            Assert.Equal(0, results.Count());
+        }
+
+        [Fact]
         public void GetByPermalink_Ok()
         {
             var post = _postRepository.GetByPermalink(PermalinkTest);

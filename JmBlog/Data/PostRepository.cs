@@ -49,7 +49,7 @@ namespace JmBlog.Data
                     Title = x.Title,
                     Summary = x.Summary,
                     DatePublished = x.DatePublished.Value,
-                    UrlImage = x.UrlImage,
+                    ImageBase64 = x.ImageBase64,
                     Permalink = x.Permalink
                 });
 
@@ -59,7 +59,7 @@ namespace JmBlog.Data
             if (!paging.Size.HasValue)
                 paging.Size = size;
 
-            return query.Skip((paging.Page.Value * paging.Size.Value)).Take(paging.Size.Value);
+            return query.Skip(paging.Page.Value * paging.Size.Value).Take(paging.Size.Value);
         }
 
         public IEnumerable<PostListViewModel> GetByFilter(PagingFilter paging)
@@ -74,7 +74,7 @@ namespace JmBlog.Data
                     Title = x.Title,
                     Summary = x.Summary,
                     DatePublished = x.DatePublished.Value,
-                    UrlImage = x.UrlImage
+                    ImageBase64 = x.ImageBase64
                 });
 
             if (!paging.Page.HasValue)

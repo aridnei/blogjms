@@ -27,7 +27,7 @@ namespace JmBlog.Tests.Services
         [Fact]
         public async Task MustCallServiceOnCreate()
         {
-            var request = new PostCreateViewModel() { Title = "Teste", Text = "Teste" };
+            var request = new PostCreateViewModel() { Title = "Teste", Text = "<p>Teste</p>" };
             _mockRepository.Setup(x => x.Save(It.IsAny<Post>())).Returns(Task.FromResult(1));
             _mockRepository.Setup(x => x.GetPermalinks(It.IsAny<string>())).Returns(1);
 
