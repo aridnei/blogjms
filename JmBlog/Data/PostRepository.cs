@@ -29,6 +29,11 @@ namespace JmBlog.Data
             return _context.Posts.FirstOrDefault(p => p.Id == postId);
         }
 
+        public IEnumerable<Post> GetByPermaLink(string permalink)
+        {
+            return _context.Posts.Where(x => x.PermaLink.Equals(permalink));
+        }
+
         public IEnumerable<PostListViewModel> Get(PagingFilter paging)
         {
             var query = _context.Posts.Where(x => x.DatePublished != null)
