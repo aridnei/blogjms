@@ -56,7 +56,7 @@ namespace JmBlog.Tests.Controllers
         public void MustReturnBadRequestWhenThrowsException()
         {
             var request = new PostCreateViewModel();
-            _mockService.Setup(x => x.Create(It.IsAny<PostCreateViewModel>())).Callback(()=> throw new Exception("Error"));
+            _mockService.Setup(x => x.Create(It.IsAny<PostCreateViewModel>())).Callback(() => throw new Exception("Error"));
 
             var result = _controller.Post(request);
             _mockService.Verify(x => x.Create(It.IsAny<PostCreateViewModel>()), Times.Once);
@@ -65,11 +65,11 @@ namespace JmBlog.Tests.Controllers
             Assert.IsType<BadRequestObjectResult>(result);
         }
 
-<<<<<<< HEAD
+
         [Fact]
         public void GetPostById_OK_Response()
         {
-            var p =  Builder<Post>.CreateNew().Build();
+            var p = Builder<Post>.CreateNew().Build();
             _mockService.Setup(x => x.GetById(1)).Returns(p);
 
             var getResult = _controller.Get(1);
@@ -86,50 +86,19 @@ namespace JmBlog.Tests.Controllers
 
         }
 
+        [Fact]
         public void GetPostById_NotFound_Response()
         {
             _mockService.Setup(x => x.GetById(1)).Returns((Post)null);
 
             var getResult = _controller.Get(1);
-            var result = getResult as NotFoundResult;           
+            var result = getResult as NotFoundResult;
 
-            Assert.Equal((int)HttpStatusCode.NotFound, result.StatusCode);            
-            
+            Assert.Equal((int)HttpStatusCode.NotFound, result.StatusCode);
+
             _mockService.Verify(x => x.GetById(1), Times.Once);
+        }
 
-=======
-        // [Fact]
-        // public void GetPostById_OK_Response()
-        // {
-        //     var p =  Builder<Post>.CreateNew().Build();
-        //     _mockService.Setup(x => x.GetById(1)).Returns(p);
-
-        //     var getResult = _controller.Get(1);
-        //     var result = getResult as OkObjectResult;
-        //     var content = result.Value as Post;
-
-        //     Assert.Equal((int)HttpStatusCode.OK, result.StatusCode);
-        //     Assert.NotNull(content);
-        //     Assert.Equal(p.Id, content.Id);
-        //     Assert.Equal(p.Title, content.Title);
-        //     Assert.Equal(p.Summary, content.Summary);
-        //     Assert.Equal(p.Text, content.Text);
-        //     _mockService.Verify(x => x.GetById(1), Times.Once);
-
-        // }
-
-        // public void GetPostById_NotFound_Response()
-        // {
-        //     _mockService.Setup(x => x.GetById(1)).Returns((Post)null);
-
-        //     var getResult = _controller.Get(1);
-        //     var result = getResult as NotFoundResult;           
-
-        //     Assert.Equal((int)HttpStatusCode.NotFound, result.StatusCode);            
-
-        //     _mockService.Verify(x => x.GetById(1), Times.Once);
-
-        // }
 
         [Fact]
         public void ShouldReturnOkResponseFromAllPosts()
@@ -153,7 +122,7 @@ namespace JmBlog.Tests.Controllers
             _mockService.Verify(x => x.Get(It.IsAny<PagingFilter>()), Times.Once);
             _mockService.VerifyNoOtherCalls();
             Assert.IsType<List<PostListViewModel>>(result);
->>>>>>> master
+
         }
     }
 }
