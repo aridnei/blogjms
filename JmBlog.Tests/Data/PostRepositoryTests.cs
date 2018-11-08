@@ -93,29 +93,29 @@ namespace JmBlog.Tests.Data
         }
 
         [Fact]
-        public void Should_Return_Posts_Where_Size_And_Page_IsNull()
+        public void Should_Return_Posts_Where_Size_Page_And_Filter_IsNull()
         {
             var paging = new PagingFilter();
 
-            var posts = _postRepository.Get(paging);
-            Assert.NotNull(posts);
+            var posts = _postRepository.GetByFilter(paging);
+            Assert.NotEmpty(posts);
         }
 
         [Fact]
         public void Should_Return_Total_Posts_Equals_Size()
         {
-            var paging = new PagingFilter() { Size = 5 };
+            var paging = new PagingFilter() { Size = 5, Filter = "Title" };
 
-            var posts = _postRepository.Get(paging);
+            var posts = _postRepository.GetByFilter(paging);
             Assert.Equal(5, posts.Count());
         }
 
         [Fact]
         public void Should_Return_Zero_Posts_Where_Page_Greather_Than_Total_Itens()
         {
-            var paging = new PagingFilter() { Page = 1 };
+            var paging = new PagingFilter() { Page = 1, Filter = "" };
 
-            var posts = _postRepository.Get(paging);
+            var posts = _postRepository.GetByFilter(paging);
             Assert.Equal(0, posts.Count());
         }
 

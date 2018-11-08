@@ -64,6 +64,9 @@ namespace JmBlog.Data
 
         public IEnumerable<PostListViewModel> GetByFilter(PagingFilter paging)
         {
+            if (string.IsNullOrEmpty(paging.Filter))
+                paging.Filter = string.Empty;
+
             var query = _context.Posts.Where(x => x.DatePublished != null && (x.Title.ToUpper().Contains(paging.Filter.ToUpper()) || x.Text.ToUpper().Contains(paging.Filter.ToUpper())))
                 .OrderByDescending(x => x.DatePublished).Select(x => new PostListViewModel()
                 {
