@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using JmBlog.Interfaces;
 using JmBlog.Model;
 using JmBlog.ViewModels;
@@ -8,9 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JmBlog.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/")]
     [ApiController]
-    public class PostController : ControllerBase
+    public class PostController : Controller
     {
         private IPostService _postService;
 
@@ -20,7 +21,7 @@ namespace JmBlog.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] PostCreateViewModel viewModel)
+        public async Task<IActionResult> Post([FromBody] PostCreateViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -29,7 +30,7 @@ namespace JmBlog.Controllers
 
             try
             {
-                var postId = _postService.Create(viewModel);
+                var postId = await _postService.Create(viewModel);
                 return base.Created(HttpContext.Request.Path + "/" + postId, new { id = postId });
             }
             catch (Exception ex)
@@ -43,6 +44,17 @@ namespace JmBlog.Controllers
         public IActionResult Get(int id)
         {
             var obj = _postService.GetById(id);
+            if (obj == null)
+                return NotFound();
+
+            return Ok(obj);
+        }
+
+        [HttpGet]
+        [Route("Permalink/{permalink}")]
+        public IActionResult GetByPermalink(string permalink)
+        {
+            var obj = _postService.GetByPermalink(permalink);
             if (obj == null)
                 return NotFound();
 

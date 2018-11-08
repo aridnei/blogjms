@@ -11,5 +11,7 @@ namespace JmBlog.Data.Contracts
         Post GetById(int postId);
         IEnumerable<PostListViewModel> Get(PagingFilter paging);
         IEnumerable<PostListViewModel> GetByFilter(PagingFilter paging);
+        int GetPermalinks(string permalink);
+        Post GetByPermalink(string permalink);
     }
 }
