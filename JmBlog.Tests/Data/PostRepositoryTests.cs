@@ -22,6 +22,7 @@ namespace JmBlog.Tests.Data
         private PostRepository _postRepository;
 
         private BlogContext _ctx;
+        private int OneId = 0;
 
         public PostRepositoryTests()
         {
@@ -50,22 +51,24 @@ namespace JmBlog.Tests.Data
         [Fact]
         public void GetById_Ok()
         {
-            var post = _postRepository.GetById(1);
+            var post = _postRepository.GetById(OneId);
             Assert.NotNull(post);
         }
 
         [Fact]
         public void GetById_Null()
         {
-            var post = _postRepository.GetById(1);
+            var post = _postRepository.GetById(100);
             Assert.Null(post);
         }
 
         private async Task PopulateDB()
         {
             var posts = Builder<Post>.CreateListOfSize(10).All().With(x => x.Id, 0).Build().ToList();
-            foreach(var p in posts)
+            foreach(var p in posts){
                 await _postRepository.Save(p);
+                OneId = p.Id;
+            }
         }
 
         private BlogContext GetInMemoryDB()

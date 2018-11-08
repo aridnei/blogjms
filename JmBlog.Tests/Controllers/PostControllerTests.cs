@@ -50,37 +50,37 @@ namespace JmBlog.Tests.Controllers
             Assert.IsType<BadRequestObjectResult>(result);
         }
 
-        // [Fact]
-        // public void GetPostById_OK_Response()
-        // {
-        //     var p =  Builder<Post>.CreateNew().Build();
-        //     _mockService.Setup(x => x.GetById(1)).Returns(p);
+        [Fact]
+        public void GetPostById_OK_Response()
+        {
+            var p =  Builder<Post>.CreateNew().Build();
+            _mockService.Setup(x => x.GetById(1)).Returns(p);
 
-        //     var getResult = _controller.Get(1);
-        //     var result = getResult as OkObjectResult;
-        //     var content = result.Value as Post;
+            var getResult = _controller.Get(1);
+            var result = getResult as OkObjectResult;
+            var content = result.Value as Post;
 
-        //     Assert.Equal((int)HttpStatusCode.OK, result.StatusCode);
-        //     Assert.NotNull(content);
-        //     Assert.Equal(p.Id, content.Id);
-        //     Assert.Equal(p.Title, content.Title);
-        //     Assert.Equal(p.Summary, content.Summary);
-        //     Assert.Equal(p.Text, content.Text);
-        //     _mockService.Verify(x => x.GetById(1), Times.Once);
+            Assert.Equal((int)HttpStatusCode.OK, result.StatusCode);
+            Assert.NotNull(content);
+            Assert.Equal(p.Id, content.Id);
+            Assert.Equal(p.Title, content.Title);
+            Assert.Equal(p.Summary, content.Summary);
+            Assert.Equal(p.Text, content.Text);
+            _mockService.Verify(x => x.GetById(1), Times.Once);
 
-        // }
+        }
 
-        // public void GetPostById_NotFound_Response()
-        // {
-        //     _mockService.Setup(x => x.GetById(1)).Returns((Post)null);
+        public void GetPostById_NotFound_Response()
+        {
+            _mockService.Setup(x => x.GetById(1)).Returns((Post)null);
 
-        //     var getResult = _controller.Get(1);
-        //     var result = getResult as NotFoundResult;           
+            var getResult = _controller.Get(1);
+            var result = getResult as NotFoundResult;           
 
-        //     Assert.Equal((int)HttpStatusCode.NotFound, result.StatusCode);            
+            Assert.Equal((int)HttpStatusCode.NotFound, result.StatusCode);            
             
-        //     _mockService.Verify(x => x.GetById(1), Times.Once);
+            _mockService.Verify(x => x.GetById(1), Times.Once);
 
-        // }
+        }
     }
 }
