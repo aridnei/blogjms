@@ -11,7 +11,7 @@ namespace JmBlog.Services
     public class PostService : IPostService
     {
         private IPostRepository _postRepository;
-        const int numberOfWords = 5;
+        const int numberOfWords = 25;
 
         public PostService(IPostRepository postRepository)
         {
