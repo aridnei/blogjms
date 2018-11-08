@@ -11,7 +11,7 @@ namespace JmBlog.ViewModels
         public string Title { get; set; }
         public string Summary { get; set; }
         public DateTime DatePublished { get; set; }
-        public string UrlImage { get; set; }
+        public string ImageBase64 { get; set; }
         public string Permalink { get; set; }
     }
 }
