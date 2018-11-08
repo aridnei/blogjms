@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit2.Should;
 
 namespace JmBlog.Tests.Data
 {
@@ -23,6 +24,7 @@ namespace JmBlog.Tests.Data
 
         private BlogContext _ctx;
         private int OneId = 0;
+        private string PermalinkTest = string.Empty;
 
         public PostRepositoryTests()
         {
@@ -63,6 +65,34 @@ namespace JmBlog.Tests.Data
         }
 
         [Fact]
+        public void GetByPermalink_Ok()
+        {
+            var post = _postRepository.GetByPermalink(PermalinkTest);
+            Assert.NotNull(post);
+        }
+
+        [Fact]
+        public void GetByPermalink_Null()
+        {
+            var post = _postRepository.GetByPermalink("um-permalink-teste");
+            Assert.Null(post);
+        }
+
+        [Fact]
+        public void GetByPermalinks_WithResult()
+        {
+            var count = _postRepository.GetPermalinks(PermalinkTest);
+            (count).ShouldBe(1);
+        }
+
+        [Fact]
+        public void GetByPermalinks_WithoutResult()
+        {
+            var count = _postRepository.GetPermalinks("um-permalink-teste");
+            (count).ShouldBe(0);
+        }
+
+        [Fact]
         public void Should_Return_Posts_Where_Size_And_Page_IsNull()
         {
             var paging = new PagingFilter();
@@ -91,10 +121,11 @@ namespace JmBlog.Tests.Data
 
         private async Task PopulateDB()
         {
-            var posts = Builder<Post>.CreateListOfSize(10).All().With(x => x.Id, 0).Build().ToList();
+            var posts = Builder<Post>.CreateListOfSize(10).All().With(x => x.Id, 0).TheLast(1).With(x => x.Permalink, "permalink-teste").Build().ToList();
             foreach(var p in posts){
                 await _postRepository.Save(p);
                 OneId = p.Id;
+                PermalinkTest = p.Permalink;
             }
         }
 

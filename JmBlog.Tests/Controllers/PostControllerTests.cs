@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace JmBlog.Tests.Controllers
@@ -29,12 +30,12 @@ namespace JmBlog.Tests.Controllers
         }
 
         [Fact]
-        public void MustCallServiceOnPost()
+        public async Task MustCallServiceOnPost()
         {
             var request = new PostCreateViewModel() { Title = "Teste", Text = "Teste" };
-            _mockService.Setup(x => x.Create(It.IsAny<PostCreateViewModel>()));
+            _mockService.Setup(x => x.Create(It.IsAny<PostCreateViewModel>())).ReturnsAsync(1);
 
-            var result = _controller.Post(request);
+            var result = await _controller.Post(request);
 
             _mockService.Verify(x => x.Create(It.IsAny<PostCreateViewModel>()), Times.Once);
             _mockService.VerifyNoOtherCalls();
@@ -42,23 +43,23 @@ namespace JmBlog.Tests.Controllers
         }
 
         [Fact]
-        public void MustReturnBadRequestWhenModelIsInvalid()
+        public async Task MustReturnBadRequestWhenModelIsInvalid()
         {
             var request = new PostCreateViewModel();
             _controller.ModelState.AddModelError("Title", "Error");
 
-            var result = _controller.Post(request);
+            var result = await _controller.Post(request);
 
             Assert.IsType<BadRequestObjectResult>(result);
         }
 
         [Fact]
-        public void MustReturnBadRequestWhenThrowsException()
+        public async Task MustReturnBadRequestWhenThrowsException()
         {
             var request = new PostCreateViewModel();
             _mockService.Setup(x => x.Create(It.IsAny<PostCreateViewModel>())).Callback(() => throw new Exception("Error"));
 
-            var result = _controller.Post(request);
+            var result = await _controller.Post(request);
             _mockService.Verify(x => x.Create(It.IsAny<PostCreateViewModel>()), Times.Once);
             _mockService.VerifyNoOtherCalls();
 
