@@ -17,7 +17,7 @@ namespace JmBlog.Services
             _postRepository = postRepository;
         }
 
-        public Post Create(PostCreateViewModel viewModel)
+        public int Create(PostCreateViewModel viewModel)
         {
             Post post = new Post();
             post.Title = viewModel.Title;
@@ -27,7 +27,7 @@ namespace JmBlog.Services
             post.DateUpdated = DateTime.Now;
             post.UrlImage = viewModel.UrlImage;
             _postRepository.Save(post);
-            return post;
+            return post.Id;
         }
     }
 }
