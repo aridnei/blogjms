@@ -46,9 +46,21 @@ namespace JmBlog.Tests.Controllers
         {
             var request = new PostCreateViewModel();
             _controller.ModelState.AddModelError("Title", "Error");
-            _mockService.Setup(x => x.Create(It.IsAny<PostCreateViewModel>()));
 
             var result = _controller.Post(request);
+
+            Assert.IsType<BadRequestObjectResult>(result);
+        }
+
+        [Fact]
+        public void MustReturnBadRequestWhenThrowsException()
+        {
+            var request = new PostCreateViewModel();
+            _mockService.Setup(x => x.Create(It.IsAny<PostCreateViewModel>())).Callback(()=> throw new Exception("Error"));
+
+            var result = _controller.Post(request);
+            _mockService.Verify(x => x.Create(It.IsAny<PostCreateViewModel>()), Times.Once);
+            _mockService.VerifyNoOtherCalls();
 
             Assert.IsType<BadRequestObjectResult>(result);
         }
@@ -81,7 +93,7 @@ namespace JmBlog.Tests.Controllers
         //     var result = getResult as NotFoundResult;           
 
         //     Assert.Equal((int)HttpStatusCode.NotFound, result.StatusCode);            
-            
+
         //     _mockService.Verify(x => x.GetById(1), Times.Once);
 
         // }
