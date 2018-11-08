@@ -37,25 +37,36 @@ namespace JmBlog.Tests.Services
         [Fact]
         public void ShouldReturnAllPosts()
         {
-            var paging = new PagingFilter() { page = 1, pageSize = 10, search = "" };
-            _mockRepository.Setup(x => x.Get(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()));
+            var paging = new PagingFilter() { Page = 1, Size = 10, Filter = "" };
+            _mockRepository.Setup(x => x.Get(It.IsAny<PagingFilter>()));
 
             _service.Get(paging);
 
-            _mockRepository.Verify(x => x.Get(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>(), Times.Once));
+            _mockRepository.Verify(x => x.Get(It.IsAny<PagingFilter>()));
             _mockRepository.VerifyNoOtherCalls();
         }
 
         [Fact]
-        public void ShouldReturnPostsBySearch()
+        public void ShouldReturnPostsByFilter()
         {
-            var paging = new PagingFilter() { page = 0, pageSize = 0, search = "Teste" };
-            _mockRepository.Setup(x => x.Get(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()));
+            var paging = new PagingFilter() { Filter = "Teste" };
+            _mockRepository.Setup(x => x.Get(It.IsAny<PagingFilter>()));
 
             _service.Get(paging);
 
-            _mockRepository.Verify(x => x.Get(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>(), Times.Once));
+            _mockRepository.Verify(x => x.GetByFilter(It.IsAny<PagingFilter>()));
             _mockRepository.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public void ShouldNotReturnPostsByEmptyFilter()
+        {
+            var paging = new PagingFilter();
+            _mockRepository.Setup(x => x.Get(It.IsAny<PagingFilter>()));
+
+            _service.Get(paging);
+
+            _mockRepository.Verify(x => x.GetByFilter(It.IsAny<PagingFilter>()), Times.Never);
         }
     }
 }
