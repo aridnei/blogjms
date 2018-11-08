@@ -47,7 +47,7 @@ namespace JmBlog.Data
             if (!paging.Size.HasValue)
                 paging.Size = size;
 
-            return query.Skip(paging.Page.Value).Take(paging.Size.Value);
+            return query.Skip(paging.Page.Value * paging.Size.Value).Take(paging.Size.Value);
         }
 
         public IEnumerable<PostListViewModel> GetByFilter(PagingFilter paging)
@@ -68,7 +68,7 @@ namespace JmBlog.Data
             if (!paging.Size.HasValue)
                 paging.Size = size;
 
-            return query.Skip(paging.Page.Value).Take(paging.Size.Value);
+            return query.Skip(paging.Page.Value * paging.Size.Value).Take(paging.Size.Value);
         }
     }
 }
