@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace JmBlog
 {
@@ -38,6 +39,45 @@ namespace JmBlog
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddTransient<IPostService, PostService>();
+
+            SetupSwagger(services);
+            SetupCorsPolicy(services);
+        }
+
+        private static void SetupSwagger(IServiceCollection services)
+        {
+            services.ConfigureSwaggerGen(x =>
+            {
+                x.IncludeXmlComments("JmBlog.xml");
+            });
+
+            services.AddSwaggerGen(options =>
+            {
+                options.DescribeAllEnumsAsStrings();
+                options.CustomSchemaIds(x => x.FullName);
+                options.SwaggerDoc("v1", new Info
+                {
+                    Title = "JMS Blog",
+                    Version = "v1",
+                    Description = "Camada API de serviços do JMS Blog",
+                    TermsOfService = "Termos do serviço",
+                    Contact = new Contact()
+                    {
+                        Name = "Team JMS Blog"
+                    }
+                });
+
+            });
+        }
+
+        private static void SetupCorsPolicy(IServiceCollection services)
+        {
+            services.AddCors(options => options.AddPolicy("CorsPolicy",
+                                            builder => builder.AllowAnyHeader()
+                                            .AllowAnyOrigin()
+                                            .AllowAnyMethod()
+                                            .AllowCredentials()
+                        ));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +91,16 @@ namespace JmBlog
             {
                 app.UseHsts();
             }
+
+            app.UseSwagger()
+              .UseSwaggerUI(c =>
+              {
+                  c.SwaggerEndpoint("v1/swagger.json", "API V1");
+                  c.DocExpansion("none");
+              });
+
+            // Adicionando CORS
+            app.UseCors("CorsPolicy");
 
             app.UseHttpsRedirection();
             app.UseMvc();

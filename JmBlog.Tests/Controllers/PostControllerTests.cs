@@ -1,4 +1,7 @@
-﻿using Moq;
+﻿using JmBlog.Controllers;
+using JmBlog.Interfaces;
+using JmBlog.ViewModels;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,24 +23,12 @@ namespace JmBlog.Tests.Controllers
         [Fact]
         public void MustCallServiceOnPost()
         {
-            var request = new Post();
-            _mockService.Setup(x => x.Create(It.IsAny<Post>()));
+            var request = new PostCreateViewModel();
+            _mockService.Setup(x => x.Create(It.IsAny<PostCreateViewModel>()));
 
             _controller.Post(request);
 
-            _mockService.Verify(x => x.Create(It.IsAny<Post>()), Times.Once);
-            _mockService.VerifyNoOtherCalls();
-        }
-
-        [Fact]
-        public void MustThrowExceptionOnPost()
-        {
-            var request = new Post();
-            _mockService.Setup(x => x.Create(It.IsAny<Post>())).Callback(()=> throw new Exception("Error") );
-
-            Assert.Throws<Exception>(_controller.Post(request));
-
-            _mockService.Verify(x => x.Create(It.IsAny<Post>()), Times.Once);
+            _mockService.Verify(x => x.Create(It.IsAny<PostCreateViewModel>()), Times.Once);
             _mockService.VerifyNoOtherCalls();
         }
     }
