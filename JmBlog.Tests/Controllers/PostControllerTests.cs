@@ -3,6 +3,7 @@ using JmBlog.Controllers;
 using JmBlog.Interfaces;
 using JmBlog.Model;
 using JmBlog.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
@@ -22,6 +23,9 @@ namespace JmBlog.Tests.Controllers
         {
             _mockService = new Mock<IPostService>();
             _controller = new PostController(_mockService.Object);
+            _controller.ControllerContext = new ControllerContext();
+            _controller.ControllerContext.HttpContext = new DefaultHttpContext();
+            _controller.ControllerContext.HttpContext.Request.Path = "/Path";
         }
 
         [Fact]
@@ -34,19 +38,18 @@ namespace JmBlog.Tests.Controllers
 
             _mockService.Verify(x => x.Create(It.IsAny<PostCreateViewModel>()), Times.Once);
             _mockService.VerifyNoOtherCalls();
-            Assert.IsType<OkResult>(result);
+            Assert.IsType<CreatedResult>(result);
         }
 
         [Fact]
-        public void MustReturnBadRequestWHenModelIsInvalid()
+        public void MustReturnBadRequestWhenModelIsInvalid()
         {
             var request = new PostCreateViewModel();
+            _controller.ModelState.AddModelError("Title", "Error");
             _mockService.Setup(x => x.Create(It.IsAny<PostCreateViewModel>()));
 
             var result = _controller.Post(request);
 
-            _mockService.Verify(x => x.Create(It.IsAny<PostCreateViewModel>()), Times.Once);
-            _mockService.VerifyNoOtherCalls();
             Assert.IsType<BadRequestObjectResult>(result);
         }
 
