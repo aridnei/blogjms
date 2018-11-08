@@ -4,6 +4,7 @@ using JmBlog.Interfaces;
 using JmBlog.Model;
 using JmBlog.ViewModels;
 using System;
+using System.Collections.Generic;
 
 namespace JmBlog.Services
 {
@@ -28,6 +29,19 @@ namespace JmBlog.Services
             post.UrlImage = viewModel.UrlImage;
             _postRepository.Save(post);
             return post.Id;
+        }
+
+        public Post GetById(int id)
+        {
+            return _postRepository.GetById(id);
+        }
+
+        public IEnumerable<PostListViewModel> Get(PagingFilter paging)
+        {
+            if (!string.IsNullOrEmpty(paging.Filter))
+                return _postRepository.GetByFilter(paging);
+
+            return _postRepository.Get(paging);
         }
     }
 }
