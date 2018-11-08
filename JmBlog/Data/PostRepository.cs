@@ -2,12 +2,18 @@ using System.Threading.Tasks;
 using System.Linq;
 using JmBlog.Model;
 using JmBlog.Data.Contracts;
+using System.Collections;
+using JmBlog.ViewModels;
+using System.Collections.Generic;
 
 namespace JmBlog.Data
 {
     public class PostRepository : IPostRepository
     {
         private readonly BlogContext _context;
+        private const int page = 0;
+        private const int size = 10;
+
         public PostRepository(BlogContext context)
         {
             this._context = context;
@@ -21,6 +27,48 @@ namespace JmBlog.Data
         public Post GetById(int postId)
         {
             return _context.Posts.FirstOrDefault(p => p.Id == postId);
+        }
+
+        public IEnumerable<PostListViewModel> Get(PagingFilter paging)
+        {
+            var query = _context.Posts.Where(x => x.DatePublished != null)
+                .OrderByDescending(x => x.DatePublished).Select(x => new PostListViewModel()
+            {
+                Id =x.Id,
+               Title = x.Title,
+               Summary = x.Summary,
+               DatePublished =x.DatePublished.Value,
+               UrlImage = x.UrlImage
+            });
+
+            if (!paging.Page.HasValue)
+                paging.Page = page;
+
+            if (!paging.Size.HasValue)
+                paging.Size = size;
+
+            return query.Skip(paging.Page.Value).Take(paging.Size.Value);
+        }
+
+        public IEnumerable<PostListViewModel> GetByFilter(PagingFilter paging)
+        {
+            var query = _context.Posts.Where(x => x.DatePublished != null && (x.Title.ToUpper().Contains(paging.Filter.ToUpper()) || x.Text.ToUpper().Contains(paging.Filter.ToUpper())))
+                .OrderByDescending(x => x.DatePublished).Select(x => new PostListViewModel()
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Summary = x.Summary,
+                    DatePublished = x.DatePublished.Value,
+                    UrlImage = x.UrlImage
+                });
+
+            if (!paging.Page.HasValue)
+                paging.Page = page;
+
+            if (!paging.Size.HasValue)
+                paging.Size = size;
+
+            return query.Skip(paging.Page.Value).Take(paging.Size.Value);
         }
     }
 }
