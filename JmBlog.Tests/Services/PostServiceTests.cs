@@ -1,4 +1,5 @@
-﻿using JmBlog.Data.Contracts;
+﻿using FizzWare.NBuilder;
+using JmBlog.Data.Contracts;
 using JmBlog.Model;
 using JmBlog.Services;
 using JmBlog.Tests.Controllers;
@@ -32,6 +33,31 @@ namespace JmBlog.Tests.Services
 
             _mockRepository.Verify(x => x.Save(It.IsAny<Post>()), Times.Once);
             _mockRepository.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public void GetPostById()
+        {
+            var p = Builder<Post>.CreateNew().Build();
+            _mockRepository.Setup(x => x.GetById(1)).Returns(p);
+
+            var post = _service.GetById(1);
+
+            Assert.NotNull(post);
+
+            _mockRepository.Verify(x => x.GetById(1), Times.Once);
+        }
+
+        [Fact]
+        public void GetPostById_Null()
+        {
+            _mockRepository.Setup(x => x.GetById(1)).Returns((Post)null);
+
+            var post = _service.GetById(1);
+
+            Assert.Null(post);
+
+            _mockRepository.Verify(x => x.GetById(1), Times.Once);
         }
 
         [Fact]
