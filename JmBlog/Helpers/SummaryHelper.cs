@@ -10,7 +10,8 @@ namespace JmBlog.Helpers
     {
         public static string GetWords(string input, int numberOfWords)
         {
-            MatchCollection matches = Regex.Matches(input, @"\b[\w']*\b");
+            String result = Regex.Replace(input, @"<[^>]*>", String.Empty);
+            MatchCollection matches = Regex.Matches(result, @"\b[\w']*\b");
 
             var words = from match in matches.Cast<Match>()
                         where !string.IsNullOrEmpty(match.Value)
