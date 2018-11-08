@@ -5,6 +5,7 @@ namespace JmBlog.Data.Contracts
 {
     public interface IPostRepository
     {
-         Task Save(Post post);
+        Task Save(Post post);
+        Post GetById(int postId);
     }
 }
