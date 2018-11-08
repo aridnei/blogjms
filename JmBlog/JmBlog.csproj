@@ -27,4 +27,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="1.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="JmBlog.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
