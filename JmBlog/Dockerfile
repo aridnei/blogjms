@@ -1,23 +1,16 @@
-#Depending on the operating system of the host machines(s) that will build or run the containers, the image specified in the FROM statement may need to be changed.
-#For more information, please see https://aka.ms/containercompat
+FROM microsoft/dotnet:2.1-sdk AS build-env
+WORKDIR /JmBlog
 
-FROM microsoft/dotnet:2.1-aspnetcore-runtime-nanoserver-1709 AS base
-WORKDIR /app
-EXPOSE 50051
-EXPOSE 44349
+# Copiar csproj e restaurar dependencias
+COPY JmBlog/*.csproj ./
+RUN dotnet restore
 
-FROM microsoft/dotnet:2.1-sdk-nanoserver-1709 AS build
-WORKDIR /src
-COPY ["JmBlog/JmBlog.csproj", "JmBlog/"]
-RUN dotnet restore "JmBlog/JmBlog.csproj"
-COPY . .
-WORKDIR "/src/JmBlog"
-RUN dotnet build "JmBlog.csproj" -c Release -o /app
+# Build da aplicacao
+COPY . ./
+RUN dotnet publish -c Release -o out
 
-FROM build AS publish
-RUN dotnet publish "JmBlog.csproj" -c Release -o /app
-
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app .
+# Build da imagem
+FROM microsoft/dotnet:2.1-aspnetcore-runtime
+WORKDIR /JmBlog
+COPY --from=build-env ./JmBlog/out/ .
 ENTRYPOINT ["dotnet", "JmBlog.dll"]

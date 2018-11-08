@@ -1,0 +1,31 @@
+version: 2
+jobs:
+  build:
+    working_directory: /app
+    docker:
+      - image: docker:18.06.1-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --no-cache \
+              py-pip \
+              jq
+            pip install \
+              docker-compose==1.22.0 \
+              awscli==1.16.31
+      - run:
+          name: Build application Docker image
+          command: |
+            docker image build -t dotnetcorehelloworld .
+      - deploy:
+          name: Push application Docker image
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              login="$(aws ecr get-login --region=$AWS_DEFAULT_REGION --no-include-email)"
+              ${login}
+              docker tag dotnetcorehelloworld "${ECR_ENDPOINT}:${CIRCLE_SHA1}"
+              docker push "${ECR_ENDPOINT}:${CIRCLE_SHA1}"
+            fi
