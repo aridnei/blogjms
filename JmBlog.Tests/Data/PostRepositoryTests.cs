@@ -14,14 +14,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace JmBlog.Tests.Controllers
+namespace JmBlog.Tests.Data
 {
-    public class PostRepositoryTests
+    public class PostRepositoryTests : IDisposable
     {
-        private readonly Mock<IPostService> _mockService;
-        private readonly PostRepository _postRepository;
+        private Mock<IPostService> _mockService;
+        private PostRepository _postRepository;
 
-        private readonly BlogContext _ctx;
+        private BlogContext _ctx;
 
         public PostRepositoryTests()
         {
@@ -30,10 +30,17 @@ namespace JmBlog.Tests.Controllers
             Task.Run(() => PopulateDB()).Wait();
         }
 
+        public void Dispose()
+        {
+            _ctx.Dispose();
+            _postRepository = null;
+            _ctx = null;
+        }
+
         [Fact]
         public async Task Save()
         {
-            var p = Builder<Post>.CreateNew().With(pp => pp.Title, "Meu titulo para teste").Build();
+            var p = Builder<Post>.CreateNew().With(x => x.Id, 0).With(pp => pp.Title, "Meu titulo para teste").Build();
             await _postRepository.Save(p);
             var mPost = await _ctx.Posts.FirstOrDefaultAsync(x => x.Id == p.Id);
             Assert.NotNull(mPost);
@@ -56,7 +63,7 @@ namespace JmBlog.Tests.Controllers
 
         private async Task PopulateDB()
         {
-            var posts = Builder<Post>.CreateListOfSize(10).Build().ToList();
+            var posts = Builder<Post>.CreateListOfSize(10).All().With(x => x.Id, 0).Build().ToList();
             foreach(var p in posts)
                 await _postRepository.Save(p);
         }
@@ -69,5 +76,7 @@ namespace JmBlog.Tests.Controllers
             options = b.Options;
             return new BlogContext(options);
         }
+
+        
     }
 }
