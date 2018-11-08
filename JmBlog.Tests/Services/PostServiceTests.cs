@@ -59,5 +59,40 @@ namespace JmBlog.Tests.Services
 
             _mockRepository.Verify(x => x.GetById(1), Times.Once);
         }
+
+        [Fact]
+        public void ShouldReturnAllPosts()
+        {
+            var paging = new PagingFilter() { Page = 1, Size = 10, Filter = "" };
+            _mockRepository.Setup(x => x.Get(It.IsAny<PagingFilter>()));
+
+            _service.Get(paging);
+
+            _mockRepository.Verify(x => x.Get(It.IsAny<PagingFilter>()));
+            _mockRepository.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public void ShouldReturnPostsByFilter()
+        {
+            var paging = new PagingFilter() { Filter = "Teste" };
+            _mockRepository.Setup(x => x.Get(It.IsAny<PagingFilter>()));
+
+            _service.Get(paging);
+
+            _mockRepository.Verify(x => x.GetByFilter(It.IsAny<PagingFilter>()));
+            _mockRepository.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public void ShouldNotReturnPostsByEmptyFilter()
+        {
+            var paging = new PagingFilter();
+            _mockRepository.Setup(x => x.Get(It.IsAny<PagingFilter>()));
+
+            _service.Get(paging);
+
+            _mockRepository.Verify(x => x.GetByFilter(It.IsAny<PagingFilter>()), Times.Never);
+        }
     }
 }
