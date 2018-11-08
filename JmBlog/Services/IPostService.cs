@@ -1,4 +1,5 @@
-﻿using JmBlog.ViewModels;
+﻿using JmBlog.Model;
+using JmBlog.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,6 @@ namespace JmBlog.Interfaces
 {
     public interface IPostService
     {
-        void Create(PostCreateViewModel viewModel);
+        Post Create(PostCreateViewModel viewModel);
     }
 }

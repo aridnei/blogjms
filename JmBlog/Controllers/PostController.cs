@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using JmBlog.Interfaces;
 using JmBlog.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -28,9 +25,15 @@ namespace JmBlog.Controllers
                 return base.BadRequest("Model is invalid.");
             }
 
-            _postService.Create(viewModel);
-
-            return base.Ok();
+            try
+            {
+                var post = _postService.Create(viewModel);
+                return base.Created(HttpContext.Request.Path + "/" + post.Id, post);
+            }
+            catch (Exception ex)
+            {
+                return base.BadRequest(ex.Message);
+            }
         }
     }
 }
