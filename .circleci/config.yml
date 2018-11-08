@@ -23,7 +23,7 @@ jobs:
       - deploy:
           name: Push application Docker image
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+            if [ "${CIRCLE_BRANCH}" == "devops" ]; then
               login="$(aws ecr get-login --region=$AWS_DEFAULT_REGION --no-include-email)"
               ${login}
               docker tag jmblog "${ECR_ENDPOINT}:${CIRCLE_SHA1}"
