@@ -46,5 +46,18 @@ namespace JmBlog.Tests.Controllers
             _mockService.VerifyNoOtherCalls();
             Assert.IsType<BadRequestObjectResult>(result);
         }
+
+        [Fact]
+        public void ShouldReturnOkResponseFromAllPosts()
+        {
+            var request = new PagingFilter();
+            _mockService.Setup(x => x.Get(It.IsAny<PagingFilter>()));
+
+            var result = _controller.Get(request);
+
+            _mockService.Verify(x => x.Create(It.IsAny<PagingFilter>()), Times.Once);
+            _mockService.VerifyNoOtherCalls();
+            Assert.IsType<OkResult>(result);
+        }
     }
 }

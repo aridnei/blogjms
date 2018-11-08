@@ -33,5 +33,29 @@ namespace JmBlog.Tests.Services
             _mockRepository.Verify(x => x.Save(It.IsAny<Post>()), Times.Once);
             _mockRepository.VerifyNoOtherCalls();
         }
+
+        [Fact]
+        public void ShouldReturnAllPosts()
+        {
+            var paging = new PagingFilter() { page = 1, pageSize = 10, search = "" };
+            _mockRepository.Setup(x => x.Get(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()));
+
+            _service.Get(paging);
+
+            _mockRepository.Verify(x => x.Get(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>(), Times.Once));
+            _mockRepository.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public void ShouldReturnPostsBySearch()
+        {
+            var paging = new PagingFilter() { page = 0, pageSize = 0, search = "Teste" };
+            _mockRepository.Setup(x => x.Get(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()));
+
+            _service.Get(paging);
+
+            _mockRepository.Verify(x => x.Get(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>(), Times.Once));
+            _mockRepository.VerifyNoOtherCalls();
+        }
     }
 }
