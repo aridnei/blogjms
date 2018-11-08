@@ -8,6 +8,7 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace JmBlog.Tests.Services
@@ -24,14 +25,16 @@ namespace JmBlog.Tests.Services
         }
 
         [Fact]
-        public void MustCallServiceOnCreate()
+        public async Task MustCallServiceOnCreate()
         {
             var request = new PostCreateViewModel() { Title = "Teste", Text = "Teste" };
-            _mockRepository.Setup(x => x.Save(It.IsAny<Post>()));
+            _mockRepository.Setup(x => x.Save(It.IsAny<Post>())).Returns(Task.FromResult(1));
+            _mockRepository.Setup(x => x.GetPermalinks(It.IsAny<string>())).Returns(1);
 
-            _service.Create(request);
+            await _service.Create(request);
 
             _mockRepository.Verify(x => x.Save(It.IsAny<Post>()), Times.Once);
+            _mockRepository.Verify(x => x.GetPermalinks(It.IsAny<string>()), Times.Once);
             _mockRepository.VerifyNoOtherCalls();
         }
 
