@@ -12,5 +12,5 @@ RUN dotnet publish -c Release -o out
 # Build da imagem
 FROM microsoft/dotnet:2.1-aspnetcore-runtime
 WORKDIR /JmBlog
-COPY --from=build-env ./JmBlog/out/ .
+COPY --from=build-env ./JmBlog/JmBlog/out/ .
 ENTRYPOINT ["dotnet", "JmBlog.dll"]
