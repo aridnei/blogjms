@@ -5,11 +5,11 @@ namespace JmBlog.ViewModels
 {
     public class PostCreateViewModel
     {
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         public string Title { get; set; }
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         public string Text { get; set; }
-        public DateTime DatePublished { get; set; }
+        public DateTime? DatePublished { get; set; }
         public string UrlImage { get; set; }
     }
 }

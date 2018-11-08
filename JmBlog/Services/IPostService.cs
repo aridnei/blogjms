@@ -1,13 +1,13 @@
-﻿using JmBlog.ViewModels;
-using System;
+﻿using JmBlog.Model;
+using JmBlog.ViewModels;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace JmBlog.Interfaces
 {
     public interface IPostService
     {
-        void Create(PostCreateViewModel viewModel);
+        int Create(PostCreateViewModel viewModel);
+        Post GetById(int id);
+        IEnumerable<PostListViewModel> Get(PagingFilter paging);
     }
 }
