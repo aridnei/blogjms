@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using JmBlog.Data.Contracts;
 using JmBlog.Interfaces;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace JmBlog.Setup
 {
+    [ExcludeFromCodeCoverage]
     public static class DbSetup
     {
         public static async Task InitDB(this IApplicationBuilder app, IConfiguration configuration)

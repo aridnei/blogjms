@@ -1,0 +1,1130 @@
+{
+  "JmBlog.dll": {
+    "C:\\projetos JM\\jmblog\\JmBlog\\Program.cs": {
+      "JmBlog.Program": {
+        "System.Void JmBlog.Program::Main(System.String[])": {
+          "Lines": {
+            "16": 0,
+            "17": 0,
+            "18": 0
+          },
+          "Branches": []
+        },
+        "Microsoft.AspNetCore.Hosting.IWebHostBuilder JmBlog.Program::CreateWebHostBuilder(System.String[])": {
+          "Lines": {
+            "21": 0,
+            "22": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\projetos JM\\jmblog\\JmBlog\\Startup.cs": {
+      "JmBlog.Startup": {
+        "Microsoft.Extensions.Configuration.IConfiguration JmBlog.Startup::get_Configuration()": {
+          "Lines": {
+            "30": 0
+          },
+          "Branches": []
+        },
+        "System.Void JmBlog.Startup::ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)": {
+          "Lines": {
+            "34": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "42": 0,
+            "44": 0,
+            "45": 0,
+            "46": 0
+          },
+          "Branches": [
+            {
+              "Line": 36,
+              "Offset": 8,
+              "EndOffset": 10,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 36,
+              "Offset": 8,
+              "EndOffset": 33,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void JmBlog.Startup::SetupSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)": {
+          "Lines": {
+            "49": 0,
+            "50": 0,
+            "51": 0,
+            "52": 0,
+            "53": 0,
+            "55": 0,
+            "56": 0,
+            "57": 0,
+            "58": 0,
+            "59": 0,
+            "60": 0,
+            "61": 0,
+            "62": 0,
+            "63": 0,
+            "64": 0,
+            "65": 0,
+            "66": 0,
+            "67": 0,
+            "68": 0,
+            "69": 0,
+            "70": 0,
+            "71": 0,
+            "72": 0
+          },
+          "Branches": [
+            {
+              "Line": 50,
+              "Offset": 8,
+              "EndOffset": 10,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 50,
+              "Offset": 8,
+              "EndOffset": 33,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 55,
+              "Offset": 46,
+              "EndOffset": 48,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 55,
+              "Offset": 46,
+              "EndOffset": 71,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void JmBlog.Startup::SetupCorsPolicy(Microsoft.Extensions.DependencyInjection.IServiceCollection)": {
+          "Lines": {
+            "75": 0,
+            "76": 0,
+            "77": 0,
+            "78": 0,
+            "79": 0,
+            "80": 0,
+            "81": 0,
+            "82": 0
+          },
+          "Branches": [
+            {
+              "Line": 76,
+              "Offset": 8,
+              "EndOffset": 10,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 76,
+              "Offset": 8,
+              "EndOffset": 33,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void JmBlog.Startup::Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)": {
+          "Lines": {
+            "86": 0,
+            "87": 0,
+            "88": 0,
+            "89": 0,
+            "90": 0,
+            "91": 0,
+            "92": 0,
+            "94": 0,
+            "95": 0,
+            "96": 0,
+            "98": 0,
+            "99": 0,
+            "100": 0,
+            "101": 0,
+            "102": 0,
+            "103": 0,
+            "106": 0,
+            "108": 0,
+            "109": 0,
+            "110": 0
+          },
+          "Branches": [
+            {
+              "Line": 89,
+              "Offset": 52,
+              "EndOffset": 54,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 89,
+              "Offset": 52,
+              "EndOffset": 70,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 98,
+              "Offset": 102,
+              "EndOffset": 104,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 98,
+              "Offset": 102,
+              "EndOffset": 127,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void JmBlog.Startup::.ctor(Microsoft.Extensions.Configuration.IConfiguration)": {
+          "Lines": {
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0
+          },
+          "Branches": []
+        }
+      },
+      "JmBlog.Startup/<>c": {
+        "System.Void JmBlog.Startup/<>c::<SetupSwagger>b__5_1(Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions)": {
+          "Lines": {},
+          "Branches": [
+            {
+              "Line": 58,
+              "Offset": 15,
+              "EndOffset": 17,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 58,
+              "Offset": 15,
+              "EndOffset": 40,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "C:\\projetos JM\\jmblog\\JmBlog\\ViewModels\\PagingFilter.cs": {
+      "JmBlog.ViewModels.PagingFilter": {
+        "System.String JmBlog.ViewModels.PagingFilter::get_Filter()": {
+          "Lines": {
+            "5": 18
+          },
+          "Branches": []
+        },
+        "System.Nullable`1<System.Int32> JmBlog.ViewModels.PagingFilter::get_Page()": {
+          "Lines": {
+            "6": 19
+          },
+          "Branches": []
+        },
+        "System.Nullable`1<System.Int32> JmBlog.ViewModels.PagingFilter::get_Size()": {
+          "Lines": {
+            "7": 25
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\projetos JM\\jmblog\\JmBlog\\ViewModels\\PostCreateViewModel.cs": {
+      "JmBlog.ViewModels.PostCreateViewModel": {
+        "System.String JmBlog.ViewModels.PostCreateViewModel::get_Title()": {
+          "Lines": {
+            "9": 4
+          },
+          "Branches": []
+        },
+        "System.String JmBlog.ViewModels.PostCreateViewModel::get_Text()": {
+          "Lines": {
+            "11": 4
+          },
+          "Branches": []
+        },
+        "System.Nullable`1<System.DateTime> JmBlog.ViewModels.PostCreateViewModel::get_DatePublished()": {
+          "Lines": {
+            "12": 1
+          },
+          "Branches": []
+        },
+        "System.String JmBlog.ViewModels.PostCreateViewModel::get_UrlImage()": {
+          "Lines": {
+            "13": 1
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\projetos JM\\jmblog\\JmBlog\\ViewModels\\PostListViewModel.cs": {
+      "JmBlog.ViewModels.PostListViewModel": {
+        "System.Int32 JmBlog.ViewModels.PostListViewModel::get_Id()": {
+          "Lines": {
+            "10": 19
+          },
+          "Branches": []
+        },
+        "System.String JmBlog.ViewModels.PostListViewModel::get_Title()": {
+          "Lines": {
+            "11": 19
+          },
+          "Branches": []
+        },
+        "System.String JmBlog.ViewModels.PostListViewModel::get_Summary()": {
+          "Lines": {
+            "12": 19
+          },
+          "Branches": []
+        },
+        "System.DateTime JmBlog.ViewModels.PostListViewModel::get_DatePublished()": {
+          "Lines": {
+            "13": 23
+          },
+          "Branches": []
+        },
+        "System.String JmBlog.ViewModels.PostListViewModel::get_UrlImage()": {
+          "Lines": {
+            "14": 18
+          },
+          "Branches": []
+        },
+        "System.String JmBlog.ViewModels.PostListViewModel::get_Permalink()": {
+          "Lines": {
+            "15": 12
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\projetos JM\\jmblog\\JmBlog\\Setup\\DbSetup.cs": {
+      "JmBlog.Setup.DbSetup/<InitDB>d__0": {
+        "System.Void JmBlog.Setup.DbSetup/<InitDB>d__0::MoveNext()": {
+          "Lines": {
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "20": 0,
+            "21": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "42": 0,
+            "44": 0,
+            "45": 0,
+            "46": 0,
+            "47": 0,
+            "48": 0,
+            "49": 0,
+            "51": 0,
+            "52": 0,
+            "53": 0,
+            "54": 0,
+            "56": 0,
+            "57": 0
+          },
+          "Branches": [
+            {
+              "Line": 17,
+              "Offset": 40,
+              "EndOffset": 83,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 51,
+              "Offset": 491,
+              "EndOffset": 493,
+              "Path": 0,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 17,
+              "Offset": 40,
+              "EndOffset": 532,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 51,
+              "Offset": 491,
+              "EndOffset": 560,
+              "Path": 1,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 52,
+              "Offset": 599,
+              "EndOffset": 601,
+              "Path": 0,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 17,
+              "Offset": 40,
+              "EndOffset": 641,
+              "Path": 2,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 52,
+              "Offset": 599,
+              "EndOffset": 670,
+              "Path": 1,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 53,
+              "Offset": 709,
+              "EndOffset": 711,
+              "Path": 0,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 17,
+              "Offset": 40,
+              "EndOffset": 751,
+              "Path": 3,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 53,
+              "Offset": 709,
+              "EndOffset": 780,
+              "Path": 1,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 54,
+              "Offset": 819,
+              "EndOffset": 821,
+              "Path": 0,
+              "Ordinal": 11,
+              "Hits": 0
+            },
+            {
+              "Line": 17,
+              "Offset": 40,
+              "EndOffset": 861,
+              "Path": 4,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 54,
+              "Offset": 819,
+              "EndOffset": 890,
+              "Path": 1,
+              "Ordinal": 12,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "C:\\projetos JM\\jmblog\\JmBlog\\Services\\PostService.cs": {
+      "JmBlog.Services.PostService": {
+        "JmBlog.Model.Post JmBlog.Services.PostService::GetByPermalink(System.String)": {
+          "Lines": {
+            "46": 3,
+            "47": 3,
+            "48": 3
+          },
+          "Branches": []
+        },
+        "JmBlog.Model.Post JmBlog.Services.PostService::GetById(System.Int32)": {
+          "Lines": {
+            "51": 2,
+            "52": 2,
+            "53": 2
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.IEnumerable`1<JmBlog.ViewModels.PostListViewModel> JmBlog.Services.PostService::Get(JmBlog.ViewModels.PagingFilter)": {
+          "Lines": {
+            "56": 3,
+            "57": 3,
+            "58": 1,
+            "60": 2,
+            "61": 3
+          },
+          "Branches": [
+            {
+              "Line": 57,
+              "Offset": 17,
+              "EndOffset": 19,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 57,
+              "Offset": 17,
+              "EndOffset": 34,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.Void JmBlog.Services.PostService::.ctor(JmBlog.Data.Contracts.IPostRepository)": {
+          "Lines": {
+            "18": 9,
+            "19": 9,
+            "20": 9,
+            "21": 9
+          },
+          "Branches": []
+        }
+      },
+      "JmBlog.Services.PostService/<Create>d__3": {
+        "System.Void JmBlog.Services.PostService/<Create>d__3::MoveNext()": {
+          "Lines": {
+            "24": 1,
+            "25": 1,
+            "27": 1,
+            "28": 1,
+            "30": 1,
+            "31": 1,
+            "32": 1,
+            "34": 1,
+            "35": 1,
+            "36": 1,
+            "37": 1,
+            "38": 1,
+            "39": 1,
+            "40": 1,
+            "41": 1,
+            "42": 1,
+            "43": 1
+          },
+          "Branches": [
+            {
+              "Line": 31,
+              "Offset": 112,
+              "EndOffset": 114,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 31,
+              "Offset": 112,
+              "EndOffset": 147,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            },
+            {
+              "Line": 41,
+              "Offset": 344,
+              "EndOffset": 411,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1
+            }
+          ]
+        }
+      }
+    },
+    "C:\\projetos JM\\jmblog\\JmBlog\\Model\\Post.cs": {
+      "JmBlog.Model.Post": {
+        "System.Int32 JmBlog.Model.Post::get_Id()": {
+          "Lines": {
+            "9": 3328
+          },
+          "Branches": []
+        },
+        "System.String JmBlog.Model.Post::get_Title()": {
+          "Lines": {
+            "10": 1394
+          },
+          "Branches": []
+        },
+        "System.String JmBlog.Model.Post::get_Summary()": {
+          "Lines": {
+            "11": 1392
+          },
+          "Branches": []
+        },
+        "System.String JmBlog.Model.Post::get_Text()": {
+          "Lines": {
+            "12": 1392
+          },
+          "Branches": []
+        },
+        "System.Nullable`1<System.DateTime> JmBlog.Model.Post::get_DatePublished()": {
+          "Lines": {
+            "13": 1388
+          },
+          "Branches": []
+        },
+        "System.DateTime JmBlog.Model.Post::get_DateUpdated()": {
+          "Lines": {
+            "14": 1388
+          },
+          "Branches": []
+        },
+        "System.String JmBlog.Model.Post::get_UrlImage()": {
+          "Lines": {
+            "15": 1388
+          },
+          "Branches": []
+        },
+        "System.String JmBlog.Model.Post::get_Permalink()": {
+          "Lines": {
+            "16": 1551
+          },
+          "Branches": []
+        },
+        "System.Void JmBlog.Model.Post::.ctor()": {
+          "Lines": {
+            "18": 151,
+            "19": 151,
+            "21": 151
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\projetos JM\\jmblog\\JmBlog\\Helpers\\PermalinkHelper.cs": {
+      "JmBlog.Helpers.PermalinkHelper": {
+        "System.String JmBlog.Helpers.PermalinkHelper::GenerateSlug(System.String)": {
+          "Lines": {
+            "10": 2,
+            "11": 2,
+            "13": 2,
+            "15": 2,
+            "17": 2,
+            "18": 2,
+            "20": 2,
+            "21": 2
+          },
+          "Branches": [
+            {
+              "Line": 17,
+              "Offset": 62,
+              "EndOffset": 64,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 17,
+              "Offset": 62,
+              "EndOffset": 68,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.String JmBlog.Helpers.PermalinkHelper::RemoveDiacritics(System.String)": {
+          "Lines": {
+            "25": 3,
+            "26": 3,
+            "27": 3,
+            "29": 211,
+            "30": 101,
+            "31": 101,
+            "32": 101,
+            "33": 95,
+            "34": 95,
+            "35": 95,
+            "36": 101,
+            "38": 3,
+            "39": 3
+          },
+          "Branches": [
+            {
+              "Line": 29,
+              "Offset": 78,
+              "EndOffset": 22,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 101
+            },
+            {
+              "Line": 32,
+              "Offset": 53,
+              "EndOffset": 55,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 95
+            },
+            {
+              "Line": 32,
+              "Offset": 53,
+              "EndOffset": 66,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 101
+            },
+            {
+              "Line": 29,
+              "Offset": 78,
+              "EndOffset": 80,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 3
+            }
+          ]
+        }
+      }
+    },
+    "C:\\projetos JM\\jmblog\\JmBlog\\Helpers\\SummaryHelper.cs": {
+      "JmBlog.Helpers.SummaryHelper": {
+        "System.String JmBlog.Helpers.SummaryHelper::GetWords(System.String,System.Int32)": {
+          "Lines": {
+            "12": 1,
+            "13": 1,
+            "15": 1,
+            "16": 3,
+            "17": 2,
+            "19": 1,
+            "20": 1
+          },
+          "Branches": [
+            {
+              "Line": 15,
+              "Offset": 25,
+              "EndOffset": 27,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 15,
+              "Offset": 25,
+              "EndOffset": 50,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            },
+            {
+              "Line": 15,
+              "Offset": 61,
+              "EndOffset": 63,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 1
+            },
+            {
+              "Line": 15,
+              "Offset": 61,
+              "EndOffset": 86,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1
+            }
+          ]
+        }
+      }
+    },
+    "C:\\projetos JM\\jmblog\\JmBlog\\Data\\BlogContext.cs": {
+      "JmBlog.Data.BlogContext": {
+        "Microsoft.EntityFrameworkCore.DbSet`1<JmBlog.Model.Post> JmBlog.Data.BlogContext::get_Posts()": {
+          "Lines": {
+            "13": 26
+          },
+          "Branches": []
+        },
+        "System.Void JmBlog.Data.BlogContext::.ctor(Microsoft.EntityFrameworkCore.DbContextOptions`1<JmBlog.Data.BlogContext>)": {
+          "Lines": {
+            "8": 13,
+            "9": 13,
+            "11": 13
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\projetos JM\\jmblog\\JmBlog\\Data\\PostRepository.cs": {
+      "JmBlog.Data.PostRepository": {
+        "JmBlog.Model.Post JmBlog.Data.PostRepository::GetById(System.Int32)": {
+          "Lines": {
+            "29": 2,
+            "30": 2,
+            "31": 2
+          },
+          "Branches": []
+        },
+        "JmBlog.Model.Post JmBlog.Data.PostRepository::GetByPermalink(System.String)": {
+          "Lines": {
+            "34": 2,
+            "35": 2,
+            "36": 2
+          },
+          "Branches": []
+        },
+        "System.Int32 JmBlog.Data.PostRepository::GetPermalinks(System.String)": {
+          "Lines": {
+            "39": 2,
+            "40": 2,
+            "41": 2
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.IEnumerable`1<JmBlog.ViewModels.PostListViewModel> JmBlog.Data.PostRepository::Get(JmBlog.ViewModels.PagingFilter)": {
+          "Lines": {
+            "44": 3,
+            "45": 3,
+            "46": 3,
+            "47": 3,
+            "48": 3,
+            "49": 3,
+            "50": 3,
+            "51": 3,
+            "52": 3,
+            "53": 3,
+            "54": 3,
+            "56": 3,
+            "57": 1,
+            "59": 3,
+            "60": 1,
+            "62": 3,
+            "63": 3
+          },
+          "Branches": [
+            {
+              "Line": 56,
+              "Offset": 563,
+              "EndOffset": 565,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 56,
+              "Offset": 563,
+              "EndOffset": 578,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 3
+            },
+            {
+              "Line": 59,
+              "Offset": 600,
+              "EndOffset": 602,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 1
+            },
+            {
+              "Line": 59,
+              "Offset": 600,
+              "EndOffset": 616,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 3
+            }
+          ]
+        },
+        "System.Collections.Generic.IEnumerable`1<JmBlog.ViewModels.PostListViewModel> JmBlog.Data.PostRepository::GetByFilter(JmBlog.ViewModels.PagingFilter)": {
+          "Lines": {
+            "66": 3,
+            "67": 3,
+            "68": 2,
+            "70": 3,
+            "71": 3,
+            "72": 3,
+            "73": 3,
+            "74": 3,
+            "75": 3,
+            "76": 3,
+            "77": 3,
+            "78": 3,
+            "80": 3,
+            "81": 2,
+            "83": 3,
+            "84": 2,
+            "86": 3,
+            "87": 3
+          },
+          "Branches": [
+            {
+              "Line": 67,
+              "Offset": 32,
+              "EndOffset": 34,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 67,
+              "Offset": 32,
+              "EndOffset": 51,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 3
+            },
+            {
+              "Line": 80,
+              "Offset": 889,
+              "EndOffset": 891,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 2
+            },
+            {
+              "Line": 80,
+              "Offset": 889,
+              "EndOffset": 909,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 3
+            },
+            {
+              "Line": 83,
+              "Offset": 936,
+              "EndOffset": 938,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 2
+            },
+            {
+              "Line": 83,
+              "Offset": 936,
+              "EndOffset": 957,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 3
+            }
+          ]
+        },
+        "System.Void JmBlog.Data.PostRepository::.ctor(JmBlog.Data.BlogContext)": {
+          "Lines": {
+            "17": 13,
+            "18": 13,
+            "19": 13,
+            "20": 13
+          },
+          "Branches": []
+        }
+      },
+      "JmBlog.Data.PostRepository/<Save>d__4": {
+        "System.Void JmBlog.Data.PostRepository/<Save>d__4::MoveNext()": {
+          "Lines": {
+            "23": 131,
+            "24": 131,
+            "25": 131,
+            "26": 131
+          },
+          "Branches": [
+            {
+              "Line": 23,
+              "Offset": 14,
+              "EndOffset": 25,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 131
+            },
+            {
+              "Line": 24,
+              "Offset": 70,
+              "EndOffset": 139,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 131
+            },
+            {
+              "Line": 25,
+              "Offset": 186,
+              "EndOffset": 254,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 131
+            }
+          ]
+        }
+      }
+    },
+    "C:\\projetos JM\\jmblog\\JmBlog\\Controllers\\PostController.cs": {
+      "JmBlog.Controllers.PostController": {
+        "Microsoft.AspNetCore.Mvc.IActionResult JmBlog.Controllers.PostController::Get(System.Int32)": {
+          "Lines": {
+            "45": 2,
+            "46": 2,
+            "47": 2,
+            "48": 1,
+            "50": 1,
+            "51": 2
+          },
+          "Branches": [
+            {
+              "Line": 47,
+              "Offset": 20,
+              "EndOffset": 22,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 47,
+              "Offset": 20,
+              "EndOffset": 31,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            }
+          ]
+        },
+        "Microsoft.AspNetCore.Mvc.IActionResult JmBlog.Controllers.PostController::GetByPermalink(System.String)": {
+          "Lines": {
+            "56": 2,
+            "57": 2,
+            "58": 2,
+            "59": 1,
+            "61": 1,
+            "62": 2
+          },
+          "Branches": [
+            {
+              "Line": 58,
+              "Offset": 20,
+              "EndOffset": 22,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 58,
+              "Offset": 20,
+              "EndOffset": 31,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            }
+          ]
+        },
+        "System.Collections.Generic.IEnumerable`1<JmBlog.ViewModels.PostListViewModel> JmBlog.Controllers.PostController::Get(JmBlog.ViewModels.PagingFilter)": {
+          "Lines": {
+            "66": 1,
+            "67": 1,
+            "68": 1
+          },
+          "Branches": []
+        },
+        "System.Void JmBlog.Controllers.PostController::.ctor(JmBlog.Interfaces.IPostService)": {
+          "Lines": {
+            "18": 8,
+            "19": 8,
+            "20": 8,
+            "21": 8
+          },
+          "Branches": []
+        }
+      },
+      "JmBlog.Controllers.PostController/<Post>d__2": {
+        "System.Void JmBlog.Controllers.PostController/<Post>d__2::MoveNext()": {
+          "Lines": {
+            "25": 3,
+            "26": 3,
+            "27": 1,
+            "28": 1,
+            "32": 2,
+            "33": 2,
+            "34": 1,
+            "36": 1,
+            "37": 1,
+            "38": 1,
+            "40": 3
+          },
+          "Branches": [
+            {
+              "Line": 26,
+              "Offset": 36,
+              "EndOffset": 38,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 26,
+              "Offset": 36,
+              "EndOffset": 61,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            },
+            {
+              "Line": 28,
+              "Offset": 63,
+              "EndOffset": 69,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 2
+            },
+            {
+              "Line": 33,
+              "Offset": 105,
+              "EndOffset": 175,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 1
+            }
+          ]
+        }
+      }
+    }
+  }
+}
