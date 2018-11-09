@@ -1,6 +1,9 @@
 version: 2
 jobs:
   build:
+    branches:
+      only:
+      - devops
     working_directory: /app
     docker:
       - image: docker:18.06.1-ce-git
