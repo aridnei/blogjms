@@ -49,7 +49,7 @@ namespace JmBlog.Data
                     Title = x.Title,
                     Summary = x.Summary,
                     DatePublished = x.DatePublished.Value,
-                    UrlImage = x.UrlImage,
+                    ImageBase64 = x.ImageBase64,
                     Permalink = x.Permalink
                 });
 
@@ -74,7 +74,7 @@ namespace JmBlog.Data
                     Title = x.Title,
                     Summary = x.Summary,
                     DatePublished = x.DatePublished.Value,
-                    UrlImage = x.UrlImage
+                    ImageBase64 = x.ImageBase64
                 });
 
             if (!paging.Page.HasValue)

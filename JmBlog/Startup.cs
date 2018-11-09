@@ -101,13 +101,12 @@ namespace JmBlog
               .UseSwaggerUI(c =>
               {
                   c.SwaggerEndpoint("v1/swagger.json", "API V1");
-                  c.DocExpansion("none");
               });
 
             // Adicionando CORS
             app.UseCors("CorsPolicy");
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

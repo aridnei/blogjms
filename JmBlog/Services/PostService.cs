@@ -37,7 +37,7 @@ namespace JmBlog.Services
             post.Summary = SummaryHelper.GetWords(viewModel.Text, numberOfWords);
             post.DatePublished = viewModel.DatePublished;
             post.DateUpdated = DateTime.Now;
-            post.UrlImage = viewModel.UrlImage;
+            post.ImageBase64 = viewModel.ImageBase64;
             await _postRepository.Save(post);
             return post.Id;
         }

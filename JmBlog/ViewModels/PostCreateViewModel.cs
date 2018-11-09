@@ -10,6 +10,6 @@ namespace JmBlog.ViewModels
         [Required(AllowEmptyStrings = false)]
         public string Text { get; set; }
         public DateTime? DatePublished { get; set; }
-        public string UrlImage { get; set; }
+        public string ImageBase64 { get; set; }
     }
 }
