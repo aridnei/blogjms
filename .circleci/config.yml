@@ -1,17 +1,17 @@
 version: 2
 jobs:
-  test:
-    branches:
-      only:
-      - devops
-    docker:
-      - image: microsoft/dotnet:2.1-sdk
-    steps:
-      - checkout
-      - run: find .
-      - run: dotnet restore
-      - run: dotnet build
-      - run: dotnet test ./JmBlog.Tests/
+  # test:
+  #   branches:
+  #     only:
+  #     - devops
+  #   docker:
+  #     - image: microsoft/dotnet:2.1-sdk
+  #   steps:
+  #     - checkout
+  #     - run: find .
+  #     - run: dotnet restore
+  #     - run: dotnet build
+  #     - run: dotnet test ./JmBlog.Tests/
   build:
     branches:
       only:
