@@ -105,7 +105,7 @@ namespace JmBlog
             // Adicionando CORS
             app.UseCors("CorsPolicy");
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
