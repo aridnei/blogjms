@@ -1,10 +1,10 @@
 #!/usr/bin/env sh
 
-TASK_NAME="dotnetcorehelloworld"
+TASK_NAME="jmblog-api"
 DOCKER_IMAGE=${ECR_ENDPOINT}:${CIRCLE_SHA1}
-CLUSTER_NAME="dotnet"
-SERVICE_NAME="dotnethelloworld"
-AWS_CFG="--region us-east-1"
+CLUSTER_NAME="jmblog-test"
+SERVICE_NAME="jmblog-api"
+AWS_CFG="--region us-east-2"
 
 echo "Get the previous task definition"
 OLD_TASK_DEF=$(aws $AWS_CFG ecs describe-task-definition --task-definition $TASK_NAME --output json)
