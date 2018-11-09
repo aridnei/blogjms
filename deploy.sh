@@ -9,17 +9,23 @@ AWS_CFG="--region us-east-2"
 echo "Get the previous task definition"
 OLD_TASK_DEF=$(aws $AWS_CFG ecs describe-task-definition --task-definition $TASK_NAME --output json)
 OLD_TASK_DEF_REVISION=$(echo $OLD_TASK_DEF | jq ".taskDefinition|.revision")
-
+echo "OLD_TASK_DEF"
+echo $OLD_TASK_DEF
+echo "OLD_TASK_DEF_REVISION"
+echo $OLD_TASK_DEF_REVISION
 echo "dropping in the new image"
 NEW_TASK_DEF=$(echo $OLD_TASK_DEF | jq --arg NDI $DOCKER_IMAGE '.taskDefinition.containerDefinitions[0].image=$NDI')
-
+echo "NEW_TASK_DEF"
+echo $NEW_TASK_DEF
 echo "create a new task template with all the required information to bring over"
 FINAL_TASK=$(echo $NEW_TASK_DEF | jq '.taskDefinition|{ executionRoleArn: "arn:aws:iam::790355803000:role/ecsTaskExecutionRole", family: .family, volumes: .volumes, memory: .memory, containerDefinitions: .containerDefinitions, networkMode: "awsvpc", cpu: "256", requiresCompatibilities: ["FARGATE"] }')
-
+echo "FINAL_TASK"
+echo $FINAL_TASK
 #Set variables for re-use
 echo "Upload the task information and register the new task definition along with optional information"
 UPDATED_TASK=$(aws $AWS_CFG ecs register-task-definition --cli-input-json "$(echo $FINAL_TASK)")
-
+echo "UPDATED_TASK"
+echo $UPDATED_TASK
 echo "Storing the Revision"
 UPDATED_TASK_DEF_REVISION=$(echo $UPDATED_TASK | jq ".taskDefinition|.taskDefinitionArn")
 echo "Updated task def revision: $UPDATED_TASK_DEF_REVISION"
