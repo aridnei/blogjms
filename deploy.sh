@@ -18,7 +18,7 @@ NEW_TASK_DEF=$(echo $OLD_TASK_DEF | jq --arg NDI $DOCKER_IMAGE '.taskDefinition.
 echo "NEW_TASK_DEF"
 echo $NEW_TASK_DEF
 echo "create a new task template with all the required information to bring over"
-FINAL_TASK=$(echo $NEW_TASK_DEF | jq '.taskDefinition|{ executionRoleArn: "arn:aws:iam::790355803000:role/ecsTaskExecutionRole", family: .family, volumes: .volumes, memory: .memory, containerDefinitions: .containerDefinitions, networkMode: "awsvpc", cpu: "256", requiresCompatibilities: ["FARGATE"] }')
+FINAL_TASK=$(echo $NEW_TASK_DEF | jq '.taskDefinition|{ executionRoleArn: "arn:aws:iam::324148959017:role/ecsTaskExecutionRole", family: .family, volumes: .volumes, memory: .memory, containerDefinitions: .containerDefinitions, networkMode: "awsvpc", cpu: "256", requiresCompatibilities: ["FARGATE"] }')
 echo "FINAL_TASK"
 echo $FINAL_TASK
 #Set variables for re-use
