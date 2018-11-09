@@ -3,7 +3,7 @@ jobs:
   build:
     branches:
       only:
-      - devops
+      - master
     working_directory: /app
     docker:
       - image: docker:18.06.1-ce-git
@@ -26,7 +26,7 @@ jobs:
       - deploy:
           name: Push application Docker image
           command: |
-            if [ "${CIRCLE_BRANCH}" == "devops" ]; then
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
               login="$(aws ecr get-login --region=$AWS_DEFAULT_REGION --no-include-email)"
               ${login}
               docker tag jmblog "${ECR_ENDPOINT}:${CIRCLE_SHA1}"
