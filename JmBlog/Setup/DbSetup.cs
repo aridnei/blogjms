@@ -26,6 +26,14 @@ namespace JmBlog.Setup
                 var urlImage4 = configuration.GetSection("urlImage4").Value;
                 var urlImage5 = configuration.GetSection("urlImage5").Value;
 
+                 var p0 = new PostCreateViewModel
+                {
+                    Title = "Festa de Trabalho ainda é ambiente corporativo!",
+                    Text = "<p>2 - É comum que nessa época do ano as empresas organizem festas de confraternização para comemorar mais um ano de trabalho realizado. Essa é a ocasião ideal para que os limites sejam observados, pois o ambiente descontraído pode passar a impressão de que não existem limites corporativos naquele momento. Porém, as consequências de ações indevidas podem ser várias, desde virar um meme entre os colegas, até uma possível advertência e o pior, uma demissão.</p><br><br><p>Não erre, aproveite para se divertir e interagir com todos os colegas, mas lembrando de manter uma postura equilibrada. Com moderação, a festa da empresa pode ser uma oportunidade única de ampliar contatos, quebrar o gelo e melhorar as relações entre os colaboradores.</p><br>",
+                    ImageBase64 = urlImage,
+                    DatePublished = DateTime.Now.AddMinutes(-6)
+                };
+
                 var p1 = new PostCreateViewModel
                 {
                     Title = "Festa de Trabalho ainda é ambiente corporativo!",
@@ -65,6 +73,7 @@ namespace JmBlog.Setup
                     DatePublished = DateTime.Now.AddMinutes(-1)
                 };
 
+                await postService.Create(p0);
                 await postService.Create(p1);
                 await postService.Create(p2);
                 await postService.Create(p3);
