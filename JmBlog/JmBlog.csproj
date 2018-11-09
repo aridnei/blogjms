@@ -9,7 +9,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>JmBlog.xml</DocumentationFile>
     <OutputPath></OutputPath>
+    <noWarn>1591</noWarn>
   </PropertyGroup>
+
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
