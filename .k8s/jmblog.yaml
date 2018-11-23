@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jmblog-api
+  labels:
+    app: jmblog-api
+    tier: backend
+spec:
+  selector:
+    app: jmblog-api
+    tier: backend
+    version: 0.0.1
+  ports:
+  - protocol: "TCP"
+    port: 8090
+    targetPort: http
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jmblog-api
+  labels:
+    app: jmblog-api
+    tier: backend
+spec:
+  selector:
+    matchLabels:
+      app: jmblog-api
+      tier: backend
+      track: stable
+      environment: qas
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: jmblog-api
+        tier: backend
+        track: stable
+        environment: qas
+      annotations:
+        version: "0.0.2"
+    spec:
+      containers:
+        - name: jmblog-api
+          image: "324148959017.dkr.ecr.us-east-2.amazonaws.com/repo-jmblog-test:5cd7dea19c7a3e86eddbf0534b753200863d1a77"
+          ports:
+            - name: http
+              containerPort: 80
+          resources:      
+            requests:        
+              cpu: 200m
+              memory: 128Mi
+          env:    
+            - name: ENV_VAR01
+              value: var01_value    
+            - name: ENV_VAR02
+              value: var01_value
+      imagePullSecrets:
+        - name: myregistrykey

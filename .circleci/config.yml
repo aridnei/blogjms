@@ -1,51 +1,139 @@
 version: 2
+defaults: &defaults
+    working_directory: /tmp/persist_to_workspace
+    machine:
+      docker_layer_caching: true    # default - false
+
 jobs:
-  #test:
-  #  branches:
-  #    only:
-  #    - master
-  #  docker:
-  #    - image: microsoft/dotnet:2.1-sdk
-  #  steps:
-  #    - checkout
-  #    - run: find .
-  #    - run: dotnet restore
-  #    - run: dotnet build
-  #    - run: dotnet test
-  build:
-    branches:
-      only:
-      - master
-    working_directory: /app
-    docker:
-      - image: docker:18.06.1-ce-git
+  checkout:
+    <<: *defaults
     steps:
       - checkout
-      - setup_remote_docker
+      - run: pwd
+      - run: ls -lart
+      - persist_to_workspace:
+        root: /tmp/persist_to_workspace
+        paths:
+            - .
+  build:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+        at: /tmp/persist_to_workspace
+      - run: pwd
+      - run: ls -lart
       - run:
-          name: Install dependencies
-          command: |
-            apk add --no-cache \
-              py-pip \
-              jq
-            pip install \
-              docker-compose==1.22.0 \
-              awscli==1.16.31
+        name: Build Dotnet
+        command: |
+            wget -q https://packages.microsoft.com/config/ubuntu/14.04/packages-microsoft-prod.deb
+            sudo dpkg -i packages-microsoft-prod.deb
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends ca-certificates
+            sudo apt-get install -y dotnet-sdk-2.1
+            cd api
+            dotnet restore
+            dotnet publish
+            echo "Done."
+      - run: pwd
+      - run: ls -lart
       - run:
-          name: Build application Docker image
-          command: |
-            docker image build -t jmblog .
-      - deploy:
-          name: Push application Docker image
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              login="$(aws ecr get-login --region=$AWS_DEFAULT_REGION --no-include-email)"
-              ${login}
-              docker tag jmblog "${ECR_ENDPOINT}:${CIRCLE_SHA1}"
-              docker push "${ECR_ENDPOINT}:${CIRCLE_SHA1}"
-            fi
-      - deploy:
-          name: Update ECS Task and Service
-          command: |
-            chmod a+x ./deploy.sh
-            ./deploy.sh
+        name: Build Docker
+        command: |
+            cd /tmp/persist_to_workspace
+            export $AWS_REPO=$(cat deploy-definitions.json | jq '.aws_repo')
+            docker build -t $AWS_REPO:$GITHUB_VERSION-ci$CIRCLE_BUILD_NUM .
+            docker image ls
+            echo "$CIRCLE_BUILD_NUM" > DOCKER_IMAGE.txt
+      - persist_to_workspace:
+        root: /tmp/persist_to_workspace
+        paths:
+            - .
+        no_output_timeout: 5m
+
+  create-release:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+        at: /tmp/persist_to_workspace
+      - run: pwd
+      - run: ls -lart
+      - run: go get github.com/tcnksm/ghr
+      - run:
+        name: Creating a New Release on GitHub
+        command: |
+            mkdir -p releases
+            CIRCLE_BUILD_DOCKER=$(cat DOCKER_IMAGE.txt)
+            echo "$AWS_REPO:$GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER" > releases/Docker.txt
+            ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME $GITHUB_VERSION-CI$CIRCLE_BUILD_DOCKER releases/
+            echo "ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME $GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER releases/"
+        no_output_timeout: 5m
+
+  deploy-qas:
+    <<: *defaults
+    steps:
+     - attach_workspace:
+        at: /tmp/persist_to_workspace
+     - run: pwd
+     - run: ls -lart
+     - deploy:
+        name: AWS - Pushing to Quality Environment
+        command: |
+            CIRCLE_BUILD_DOCKER=$(cat DOCKER_IMAGE.txt)-qas
+            docker build -t $AWS_REPO:$GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER .
+            docker image ls
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends ca-certificates
+            sudo apt-get install -y build-essential awscli python3-pip software-properties-common apt-transport-https #python-software-properties
+            sudo pip3 install --upgrade awscli
+            DOCKER_IMAGE="$AWS_REPO"
+            # AWS login
+            aws configure set region $AWS_REGION
+            $(aws ecr get-login --region $AWS_REGION --no-include-email)
+            # cat DOCKER_IMAGE.txt
+            # CIRCLE_BUILD_DOCKER=$CIRCLE_BUILD_NUM
+            echo "$CIRCLE_BUILD_DOCKER"
+            # Push docker image
+            echo docker tag $DOCKER_IMAGE:$GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER $AWS_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE:$GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER
+            echo docker push $AWS_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE:$GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER
+            #docker tag $DOCKER_IMAGE:$GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER $AWS_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE:$GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER
+            #docker push $AWS_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE:$GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER
+
+            # Create a new task definition for this build
+            # sed -i "s/latest/$GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER/g" $AWS_QAS_TSK_FAMILY.json
+
+            # Register task
+            # echo "Register Task: $AWS_QAS_TSK_FAMILY"
+            # aws ecs register-task-definition --cli-input-json file://$AWS_QAS_TSK_FAMILY.json
+            # echo "Done."
+
+            # Update the service with the new task definition and desired count
+            # TASK_REVISION=`aws ecs describe-task-definition --task-definition "$AWS_QAS_TSK_FAMILY" | egrep "revision" | tr "/" " "  | tr -d , | awk '{print $2;exit;}'  | sed 's/\"$//' `
+            # echo "Update Service with Task Revision: $AWS_QAS_TSK_FAMILY:$TASK_REVISION"
+            # aws ecs update-service --cluster $AWS_QAS_ECS_CLUSTER --service $AWS_QAS_SVC_NAME --task-definition $AWS_QAS_TSK_FAMILY:$TASK_REVISION
+            echo "Done."
+
+workflows:
+  version: 2
+  workflow-project:
+    jobs:
+      - checkout:
+          context: GitJMSeguradora
+      - build:
+          context: GitJMSeguradora
+          requires:
+            - checkout
+      - create-release:
+          context: GitJMSeguradora
+          requires:
+            - build
+          filters:
+            branches: { only: 'master' }   # Ignore all branches except master
+            tags: { only: '/.*/' }         # All tags
+      - deploy-qas:
+          context: GitJMSeguradora
+          filters:
+            branches: { only: 'master' }   # Ignore all branches except master
+            tags: { only: '/.*/' }         # All tags
+          requires:
+            - build
+            - create-release

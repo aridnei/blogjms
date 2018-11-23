@@ -1,0 +1,19 @@
+{
+    "aws_region": "us-east-2",
+    "aws_repo": "324148959017.dkr.ecr.us-east-2.amazonaws.com/repo-jmblog-test",
+    "qas": {
+        "cloud": "aws",
+        "service": "s3",
+        "bucket": "app-jms-tomador-qas"
+    },
+    "stg": {
+        "cloud": "aws",
+        "service": "s3",
+        "bucket": "app-jms-tomador-stg"
+    },
+    "prd": {
+        "cloud": "aws",
+        "service": "s3",
+        "bucket": "app-jms-tomador-qas"
+    }
+}
