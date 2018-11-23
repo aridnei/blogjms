@@ -15,7 +15,8 @@ jobs:
           root: /tmp/persist_to_workspace
           paths:
             - .
-  build:
+
+  build-dotnet:
     <<: *defaults
     steps:
       - attach_workspace:
@@ -33,14 +34,25 @@ jobs:
             dotnet restore
             dotnet publish
             echo "Done."
+      - persist_to_workspace:
+            root: /tmp/persist_to_workspace
+            paths:
+               - .
+            no_output_timeout: 5m
+
+  build:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: /tmp/persist_to_workspace
       - run: pwd
       - run: ls -lart
+      - run: ls -lart JmBlog/bin/Debug/netcoreapp2.1/
+      - run: ls -lart JmBlog/bin/Debug/netcoreapp2.1/publish/
       - run:
           name: Build Docker
           command: |
             cd /tmp/persist_to_workspace
-            ls -lart JmBlog/bin/Debug/netcoreapp2.1/
-            ls -lart JmBlog/bin/Debug/netcoreapp2.1/publish/
             export AWS_REPO=$(cat deploy-definitions.json | jq --raw-output '.aws_repo')
             export GITHUB_VERSION=$(cat deploy-definitions.json | jq --raw-output '.github_version')
             echo "$AWS_REPO"
@@ -122,6 +134,10 @@ workflows:
     jobs:
       - checkout:
           context: JMBlog
+      - build-dotnet:
+          context: JMBlog
+          requires:
+            - build-dotnet
       - build:
           context: JMBlog
           requires:
