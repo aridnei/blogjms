@@ -94,6 +94,9 @@ jobs:
           name: AWS - Pushing to Quality Environment
           command: |
             CIRCLE_BUILD_DOCKER=$(cat DOCKER_IMAGE.txt)-qas
+            export AWS_REPO=$(cat deploy-definitions.json | jq --raw-output '.aws_repo')
+            export AWS_REGION=$(cat deploy-definitions.json | jq --raw-output '.aws_region')
+            export GITHUB_VERSION=$(cat deploy-definitions.json | jq --raw-output '.github_version')
             docker build -t $AWS_REPO:$GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER .
             docker image ls
             sudo apt-get update
