@@ -47,8 +47,6 @@ jobs:
           at: /tmp/persist_to_workspace
       - run: pwd
       - run: ls -lart
-      - run: ls -lart JmBlog/bin/Debug/netcoreapp2.1/
-      - run: ls -lart JmBlog/bin/Debug/netcoreapp2.1/publish/
       - run:
           name: Build Docker
           command: |
@@ -80,7 +78,7 @@ jobs:
             mkdir -p releases
             CIRCLE_BUILD_DOCKER=$(cat DOCKER_IMAGE.txt)
             echo "$AWS_REPO:$GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER" > releases/Docker.txt
-            echo ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME $GITHUB_VERSION-CI$CIRCLE_BUILD_DOCKER releases/
+            ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME $GITHUB_VERSION-CI$CIRCLE_BUILD_DOCKER releases/
             echo "ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME $GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER releases/"
           # no_output_timeout: 5m
 
@@ -149,11 +147,11 @@ workflows:
           filters:
             branches: { only: 'master' }   # Ignore all branches except master
             tags: { only: '/.*/' }         # All tags
-      # - deploy-qas:
-      #     context: JMBlog
-      #     filters:
-      #       branches: { only: 'master' }   # Ignore all branches except master
-      #       tags: { only: '/.*/' }         # All tags
-      #     requires:
-      #       - build
-      #       - create-release
+      - deploy-qas:
+          context: JMBlog
+          filters:
+            branches: { only: 'master' }   # Ignore all branches except master
+            tags: { only: '/.*/' }         # All tags
+          requires:
+            - build
+            - create-release
