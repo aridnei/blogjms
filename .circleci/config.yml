@@ -38,7 +38,7 @@ jobs:
             root: /tmp/persist_to_workspace
             paths:
                - .
-            no_output_timeout: 5m
+            # no_output_timeout: 5m
 
   build:
     <<: *defaults
@@ -64,7 +64,7 @@ jobs:
             root: /tmp/persist_to_workspace
             paths:
                - .
-            no_output_timeout: 5m
+            # no_output_timeout: 5m
 
   create-release:
     <<: *defaults
@@ -82,7 +82,7 @@ jobs:
             echo "$AWS_REPO:$GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER" > releases/Docker.txt
             echo ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME $GITHUB_VERSION-CI$CIRCLE_BUILD_DOCKER releases/
             echo "ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME $GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER releases/"
-        no_output_timeout: 5m
+        # no_output_timeout: 5m
 
   deploy-qas:
     <<: *defaults
