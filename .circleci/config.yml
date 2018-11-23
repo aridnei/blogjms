@@ -19,12 +19,12 @@ jobs:
     <<: *defaults
     steps:
       - attach_workspace:
-        at: /tmp/persist_to_workspace
+          at: /tmp/persist_to_workspace
       - run: pwd
       - run: ls -lart
       - run:
-        name: Build Dotnet
-        command: |
+          name: Build Dotnet
+          command: |
             wget -q https://packages.microsoft.com/config/ubuntu/14.04/packages-microsoft-prod.deb
             sudo dpkg -i packages-microsoft-prod.deb
             sudo apt-get update
@@ -37,18 +37,18 @@ jobs:
       - run: pwd
       - run: ls -lart
       - run:
-        name: Build Docker
-        command: |
+          name: Build Docker
+          command: |
             cd /tmp/persist_to_workspace
             export $AWS_REPO=$(cat deploy-definitions.json | jq '.aws_repo')
             docker build -t $AWS_REPO:$GITHUB_VERSION-ci$CIRCLE_BUILD_NUM .
             docker image ls
             echo "$CIRCLE_BUILD_NUM" > DOCKER_IMAGE.txt
       - persist_to_workspace:
-          root: /tmp/persist_to_workspace
-          paths:
-              - .
-          no_output_timeout: 5m
+            root: /tmp/persist_to_workspace
+            paths:
+               - .
+            no_output_timeout: 5m
 
   create-release:
     <<: *defaults
