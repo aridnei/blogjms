@@ -20,4 +20,4 @@ FROM microsoft/dotnet:2.1-aspnetcore-runtime
 RUN mkdir /app
 WORKDIR /app
 COPY JmBlog/bin/Debug/netcoreapp2.1/publish/ /app/
-ENTRYPOINT dotnet /app/api.dll
+ENTRYPOINT dotnet /app/JmBlog.dll
