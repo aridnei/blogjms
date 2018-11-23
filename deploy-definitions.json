@@ -1,6 +1,7 @@
 {
     "aws_region": "us-east-2",
     "aws_repo": "324148959017.dkr.ecr.us-east-2.amazonaws.com/repo-jmblog-test",
+    "github_version": "v0.1.0",
     "qas": {
         "cloud": "aws",
         "service": "s3",
