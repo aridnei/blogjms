@@ -43,7 +43,7 @@ jobs:
             export AWS_REPO=$(cat deploy-definitions.json | jq --raw-output '.aws_repo')
             export GITHUB_VERSION=$(cat deploy-definitions.json | jq --raw-output '.github_version')
             echo "$AWS_REPO"
-            echo "$AWS_REPO:$GITHUB_VERSION-ci$CIRCLE_BUILD_NUM
+            echo "$AWS_REPO:$GITHUB_VERSION-ci$CIRCLE_BUILD_NUM"
             docker build -t $AWS_REPO:$GITHUB_VERSION-ci$CIRCLE_BUILD_NUM .
             docker image ls
             echo "$CIRCLE_BUILD_NUM" > DOCKER_IMAGE.txt
