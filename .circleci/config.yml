@@ -40,7 +40,8 @@ jobs:
           name: Build Docker
           command: |
             cd /tmp/persist_to_workspace
-            export $AWS_REPO=$(cat deploy-definitions.json | jq '.aws_repo')
+            export AWS_REPO=$(cat deploy-definitions.json | jq '.aws_repo')
+            echo "$AWS_REPO"
             docker build -t $AWS_REPO:$GITHUB_VERSION-ci$CIRCLE_BUILD_NUM .
             docker image ls
             echo "$CIRCLE_BUILD_NUM" > DOCKER_IMAGE.txt
