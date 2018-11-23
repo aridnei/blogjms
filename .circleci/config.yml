@@ -137,11 +137,11 @@ workflows:
       - build-dotnet:
           context: JMBlog
           requires:
-            - build-dotnet
+            - checkout
       - build:
           context: JMBlog
           requires:
-            - checkout
+            - build-dotnet
       - create-release:
           context: JMBlog
           requires:
