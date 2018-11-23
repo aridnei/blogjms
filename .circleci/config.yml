@@ -70,30 +70,30 @@ jobs:
     <<: *defaults
     steps:
       - attach_workspace:
-        at: /tmp/persist_to_workspace
+          at: /tmp/persist_to_workspace
       - run: pwd
       - run: ls -lart
       - run: go get github.com/tcnksm/ghr
       - run:
-        name: Creating a New Release on GitHub
-        command: |
+          name: Creating a New Release on GitHub
+          command: |
             mkdir -p releases
             CIRCLE_BUILD_DOCKER=$(cat DOCKER_IMAGE.txt)
             echo "$AWS_REPO:$GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER" > releases/Docker.txt
             echo ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME $GITHUB_VERSION-CI$CIRCLE_BUILD_DOCKER releases/
             echo "ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME $GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER releases/"
-        # no_output_timeout: 5m
+          # no_output_timeout: 5m
 
   deploy-qas:
     <<: *defaults
     steps:
-     - attach_workspace:
-        at: /tmp/persist_to_workspace
-     - run: pwd
-     - run: ls -lart
-     - deploy:
-        name: AWS - Pushing to Quality Environment
-        command: |
+      - attach_workspace:
+          at: /tmp/persist_to_workspace
+      - run: pwd
+      - run: ls -lart
+      - deploy:
+          name: AWS - Pushing to Quality Environment
+          command: |
             CIRCLE_BUILD_DOCKER=$(cat DOCKER_IMAGE.txt)-qas
             docker build -t $AWS_REPO:$GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER .
             docker image ls
