@@ -107,14 +107,9 @@ jobs:
             # AWS login
             aws configure set region $AWS_REGION
             $(aws ecr get-login --region $AWS_REGION --no-include-email)
-            # cat DOCKER_IMAGE.txt
-            # CIRCLE_BUILD_DOCKER=$CIRCLE_BUILD_NUM
             echo "$CIRCLE_BUILD_DOCKER"
             # Push docker image
-            echo docker tag $DOCKER_IMAGE:$GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER $AWS_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE:$GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER
-            echo docker push $AWS_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE:$GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER
-            #docker tag $DOCKER_IMAGE:$GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER $AWS_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE:$GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER
-            #docker push $AWS_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE:$GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER
+            docker push $AWS_REPO:$GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER
 
             # Create a new task definition for this build
             # sed -i "s/latest/$GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER/g" $AWS_QAS_TSK_FAMILY.json
