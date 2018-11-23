@@ -117,16 +117,20 @@ workflows:
   workflow-project:
     jobs:
       - checkout:
+          context: JMBlog
       - build:
+          context: JMBlog
           requires:
             - checkout
       - create-release:
+          context: JMBlog
           requires:
             - build
           filters:
             branches: { only: 'master' }   # Ignore all branches except master
             tags: { only: '/.*/' }         # All tags
       - deploy-qas:
+          context: JMBlog
           filters:
             branches: { only: 'master' }   # Ignore all branches except master
             tags: { only: '/.*/' }         # All tags
