@@ -117,20 +117,16 @@ workflows:
   workflow-project:
     jobs:
       - checkout:
-          context: GitJMSeguradora
       - build:
-          context: GitJMSeguradora
           requires:
             - checkout
       - create-release:
-          context: GitJMSeguradora
           requires:
             - build
           filters:
             branches: { only: 'master' }   # Ignore all branches except master
             tags: { only: '/.*/' }         # All tags
       - deploy-qas:
-          context: GitJMSeguradora
           filters:
             branches: { only: 'master' }   # Ignore all branches except master
             tags: { only: '/.*/' }         # All tags
