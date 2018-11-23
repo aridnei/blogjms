@@ -12,8 +12,8 @@ jobs:
       - run: pwd
       - run: ls -lart
       - persist_to_workspace:
-        root: /tmp/persist_to_workspace
-        paths:
+          root: /tmp/persist_to_workspace
+          paths:
             - .
   build:
     <<: *defaults
@@ -45,10 +45,10 @@ jobs:
             docker image ls
             echo "$CIRCLE_BUILD_NUM" > DOCKER_IMAGE.txt
       - persist_to_workspace:
-        root: /tmp/persist_to_workspace
-        paths:
-            - .
-        no_output_timeout: 5m
+          root: /tmp/persist_to_workspace
+          paths:
+              - .
+          no_output_timeout: 5m
 
   create-release:
     <<: *defaults
