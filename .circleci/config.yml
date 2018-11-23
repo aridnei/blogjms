@@ -67,7 +67,7 @@ jobs:
             mkdir -p releases
             CIRCLE_BUILD_DOCKER=$(cat DOCKER_IMAGE.txt)
             echo "$AWS_REPO:$GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER" > releases/Docker.txt
-            ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME $GITHUB_VERSION-CI$CIRCLE_BUILD_DOCKER releases/
+            echo ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME $GITHUB_VERSION-CI$CIRCLE_BUILD_DOCKER releases/
             echo "ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME $GITHUB_VERSION-ci$CIRCLE_BUILD_DOCKER releases/"
         no_output_timeout: 5m
 
