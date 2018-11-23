@@ -132,11 +132,11 @@ workflows:
           filters:
             branches: { only: 'master' }   # Ignore all branches except master
             tags: { only: '/.*/' }         # All tags
-      - deploy-qas:
-          context: JMBlog
-          filters:
-            branches: { only: 'master' }   # Ignore all branches except master
-            tags: { only: '/.*/' }         # All tags
-          requires:
-            - build
-            - create-release
+      # - deploy-qas:
+      #     context: JMBlog
+      #     filters:
+      #       branches: { only: 'master' }   # Ignore all branches except master
+      #       tags: { only: '/.*/' }         # All tags
+      #     requires:
+      #       - build
+      #       - create-release
