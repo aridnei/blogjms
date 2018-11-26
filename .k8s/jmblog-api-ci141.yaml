@@ -6,40 +6,40 @@ metadata:
     app: jmblog-api
     tier: backend
 spec:
+  ports:
+    - protocol: "TCP"
+      port: 8090
+      targetPort: http
+  type: LoadBalancer
   selector:
     app: jmblog-api
     tier: backend
-    version: 0.0.1
-  ports:
-  - protocol: "TCP"
-    port: 8090
-    targetPort: http
-  type: LoadBalancer
+    version: v0.1.0-ci141
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jmblog-api
+  name: jmblog-api-v0.1.0-ci141
   labels:
     app: jmblog-api
     tier: backend
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: jmblog-api
+      version: v0.1.0-ci141
       tier: backend
-      track: stable
       environment: qas
-  replicas: 3
   template:
     metadata:
       labels:
         app: jmblog-api
+        version: v0.1.0-ci141
         tier: backend
-        track: stable
         environment: qas
       annotations:
-        version: "0.0.2"
+        version: "verificar no futuro!"
     spec:
       containers:
         - name: jmblog-api

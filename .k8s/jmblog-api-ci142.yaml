@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jmblog-api-ci142
+  labels:
+    app: jmblog-api
+    tier: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: jmblog-api
+      version: v0.1.0-ci142
+      tier: backend
+      environment: qas
+  template:
+    metadata:
+      labels:
+        app: jmblog-api
+        version: v0.1.0-ci142
+        tier: backend
+        environment: qas
+      annotations:
+        version: "verificar no futuro!"
+    spec:
+      containers:
+        - name: jmblog-api
+          image: "324148959017.dkr.ecr.us-east-2.amazonaws.com/repo-jmblog-test:5cd7dea19c7a3e86eddbf0534b753200863d1a77"
+          ports:
+            - name: http
+              containerPort: 80
+          resources:      
+            requests:        
+              cpu: 200m
+              memory: 128Mi
+          env:    
+            - name: ENV_VAR01
+              value: var01_value    
+            - name: ENV_VAR02
+              value: var01_value
+      imagePullSecrets:
+        - name: myregistrykey
