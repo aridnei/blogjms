@@ -67,6 +67,7 @@ namespace JmBlog.Setup
                 };
 
                 await postService.Create(p1);
+                await postService.Create(p1);
                 await postService.Create(p2);
                 await postService.Create(p3);
                 await postService.Create(p4);

@@ -2,7 +2,7 @@
 
 KUBE_CONTEXT=docker-for-desktop
 NAMESPACE=default #bluegreen
-CIRCLE_BUILD_DOCKER="142"
+CIRCLE_BUILD_DOCKER="146"
 AWS_REPO=$(cat deploy-definitions.json | jq --raw-output '.aws_repo')
 AWS_REGION=$(cat deploy-definitions.json | jq --raw-output '.aws_region')
 GITHUB_VERSION=$(cat deploy-definitions.json | jq --raw-output '.github_version')
