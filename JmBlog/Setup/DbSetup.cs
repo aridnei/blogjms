@@ -66,12 +66,19 @@ namespace JmBlog.Setup
                     DatePublished = DateTime.Now.AddMinutes(-1)
                 };
 
-                await postService.Create(p1);
+                var p6 = new PostCreateViewModel{
+                    Title = "Nasce uma Nova JOTA 2!!",
+                    Text = "<p>Não existe conquista que não seja coletiva! É um novo momento da JOTA para fazer acontecer. É uma nova JOTA que está surgindo. Mais conectada, mais tecnológica, mais inovadora. São novas formas de quebrar barreiras e conectar pessoas, empresas, projetos!</p><br/><br/><p>Essa transformação vai ser traduzida em grandes projetos e também nas pequenas atitudes. A nova JOTA é mais digital, mas também é mais ágil e ligada a tudo que acontece no mercado, de forma mais rápida e inteligente.</p><br/>",                    
+                    ImageBase64 = urlImage5,
+                    DatePublished = DateTime.Now.AddMinutes(-1)
+                };
+
                 await postService.Create(p1);
                 await postService.Create(p2);
                 await postService.Create(p3);
                 await postService.Create(p4);
                 await postService.Create(p5);
+                await postService.Create(p6);
 
             }
         }

@@ -1,7 +1,25 @@
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: jmblog-api
+#   labels:
+#     app: jmblog-api
+#     tier: backend
+# spec:
+#   ports:
+#     - protocol: "TCP"
+#       port: 8090
+#       targetPort: http
+#   type: LoadBalancer
+#   selector:
+#     app: jmblog-api
+#     tier: backend
+#     version: v0.1.0-ci151
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jmblog-api-ci142
+  name: jmblog-api-v0.1.0-ci151
   labels:
     app: jmblog-api
     tier: backend
@@ -10,14 +28,14 @@ spec:
   selector:
     matchLabels:
       app: jmblog-api
-      version: v0.1.0-ci142
+      version: v0.1.0-ci151
       tier: backend
       environment: qas
   template:
     metadata:
       labels:
         app: jmblog-api
-        version: v0.1.0-ci142
+        version: v0.1.0-ci151
         tier: backend
         environment: qas
       annotations:
@@ -25,7 +43,7 @@ spec:
     spec:
       containers:
         - name: jmblog-api
-          image: "324148959017.dkr.ecr.us-east-2.amazonaws.com/repo-jmblog-test:5cd7dea19c7a3e86eddbf0534b753200863d1a77"
+          image: "324148959017.dkr.ecr.us-east-2.amazonaws.com/repo-jmblog-test:v0.1.0-ci151-qas"
           ports:
             - name: http
               containerPort: 80

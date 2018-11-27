@@ -2,7 +2,7 @@
 
 KUBE_CONTEXT=docker-for-desktop
 NAMESPACE=default #bluegreen
-CIRCLE_BUILD_DOCKER="146"
+CIRCLE_BUILD_DOCKER="151"
 AWS_REPO=$(cat deploy-definitions.json | jq --raw-output '.aws_repo')
 AWS_REGION=$(cat deploy-definitions.json | jq --raw-output '.aws_region')
 GITHUB_VERSION=$(cat deploy-definitions.json | jq --raw-output '.github_version')
@@ -34,7 +34,7 @@ kubectl rollout status "deployment/jmblog-api-$GreenVersion"
 #echo "Deleting Blue deployment version ... jmblog-api-$BlueVersion"
 # kubectl delete deploy "jmblog-api-$BlueVersion"
 
-sleep 20
+sleep 30
 
 # Rollback service to Blue version
 echo "Rollback Blue service ... jmblog-api-$BlueVersion"
@@ -43,3 +43,7 @@ kubectl patch service jmblog-api -p '{"spec":{"selector":{"version":"'$BlueVersi
 # Delete Green version deployment
 echo "Deleting Green deployment version ... jmblog-api-$GreenVersion"
 kubectl delete deploy "jmblog-api-$GreenVersion"
+
+# Scale ReplicaSet
+echo "Scaling jmblog to 3 replicas"
+kubectl scale --current-replicas=2 --replicas=3 "deployment/jmblog-api-$BlueVersion"

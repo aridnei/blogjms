@@ -48,8 +48,7 @@ spec:
             - name: http
               containerPort: 80
           resources:      
-            requests:        
-              cpu: 200m
+            requests:
               memory: 128Mi
           env:    
             - name: ENV_VAR01
